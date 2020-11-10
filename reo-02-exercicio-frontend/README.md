@@ -1,24 +1,20 @@
-# exercicio-frontend
-
-## Project setup
+# REO-02 Exercicio Frontend
+## Instalação das dependencias
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### Executar a aplicação
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
+### Link do repositório git
 ```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
+https://github.com/igorecarvalho/gcc209-programacao-web/tree/master/reo-02-exercicio-frontend
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### Link do video explicativo
+```
+https://www.loom.com/share/0a28de05c55d49b98cbedfb232dd5920
+```
