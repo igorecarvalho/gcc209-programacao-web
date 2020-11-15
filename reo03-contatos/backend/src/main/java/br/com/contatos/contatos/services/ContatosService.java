@@ -32,6 +32,18 @@ public class ContatosService implements IContatosService {
     }
 
     @Override
+    public Contatos editar(Contatos contato) {
+
+        return contatosRepository.save(contato);
+    }
+
+    @Override
+    public void excluir(Contatos contato) {
+
+        contatosRepository.delete(contato);
+    }
+
+    @Override
     public Contatos listarContatoUnico(Long idContato) {
 
         return findContById(idContato);
