@@ -120,14 +120,14 @@
             deletar(contato) {
                 console.log(contato)
                 ContatosServices.deletar(contato, contato.id)
-                        .then( resposta => {
-                            console.log(resposta.data)
+                        .then( () => {
                             this.$toast.error('Contatos deletado!')
                             this.listar()
                         })
                         .catch(error => {
+                            console.log('erroww')
                             console.log(error)
-                            this.$toast.error('Erro ao carregar contatos!')
+                            this.$toast.error('Erro ao deletar contatos!')
                         })
 
             },

@@ -16,11 +16,11 @@ const contatoService =  {
     },
 
     editar: async(contato, id) => {
-        return ApiService.post(`contatos/${id}/editar`, contato);
+        return ApiService.put(`contatos/${id}/editar`, contato);
     },
 
-    deletar: async(id) => {
-        return ApiService.post(`contatos/${id}/deletar`);
+    deletar: async(contato, id) => {
+        return ApiService.delete(`contatos/${id}/deletar`, contato);
     },
 
 }

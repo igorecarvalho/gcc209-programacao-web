@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
-@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(value="/contatos")
 public class ContatosController {
@@ -19,17 +18,20 @@ public class ContatosController {
     @Autowired
     IContatosService contatosService;
 
+    @CrossOrigin
     @GetMapping("/listar")
     public ResponseEntity<List> listar(){
 
         return new ResponseEntity<>(contatosService.listar(), HttpStatus.OK);
     }
 
+    @CrossOrigin
     @GetMapping("/{idContato}/buscar")
     public ResponseEntity<Contatos> listarContatoUnico(@PathVariable(value="idContato") Long idContato){
         return new ResponseEntity<>(contatosService.listarContatoUnico(idContato), HttpStatus.OK);
     }
 
+    @CrossOrigin
     @PostMapping("/cadastrar")
     public ResponseEntity<Contatos> cadastrar(@RequestBody Contatos contato) {
 
@@ -37,8 +39,8 @@ public class ContatosController {
     }
 
     @CrossOrigin
-    @PutMapping("/editar")
-    public ResponseEntity<Contatos> editar(@RequestBody Contatos contato){
+    @PutMapping("/{id}/editar")
+    public ResponseEntity<Contatos> editar(@Valid @RequestBody Contatos contato){
 
         return new ResponseEntity<>(contatosService.editar(contato), HttpStatus.OK);
     }
