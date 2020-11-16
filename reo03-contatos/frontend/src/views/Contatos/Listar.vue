@@ -62,117 +62,117 @@
 
                     </template>
                     
-                <v-card
-                    fluid
-                    justify="space-around"
-                    class="mx-auto"
-                    max-width="600"
-                    height="434"
-                    tile>
-
-                    <v-col cols="12">
-
-                        <v-row justify="space-around" style="padding: 15px">
-
-                            <v-avatar
-                                size="100px">
-                                <img
-                                    src="https://cdn.vuetifyjs.com/images/john.jpg"
-                                    alt="John"
-                                >
-                            </v-avatar>
-
-                        </v-row>
-
-                        <v-row justify="space-around">
-
-                            <v-card-title>
-
-                                <h2><strong>{{item.nomeContato}}</strong></h2>
-
-                            </v-card-title>
-
-                        </v-row>
+                    <v-card
+                        fluid
+                        justify="space-around"
+                        class="mx-auto"
+                        max-width="600"
+                        height="434"
+                        tile>
 
                         <v-col cols="12">
+
+                            <v-row justify="space-around" style="padding: 15px">
+
+                                <v-avatar
+                                    size="100px">
+                                    <img
+                                        src="https://img.olhardigital.com.br/uploads/acervo_imagens/2020/04/r4x3/20200401055253_660_495_-_gato_com_mascara_de_protecao.jpg"
+                                        alt="John"
+                                    >
+                                </v-avatar>
+
+                            </v-row>
 
                             <v-row justify="space-around">
-                                
-                                <v-icon>mdi-cake</v-icon> 
-                                <v-spacer></v-spacer>
-                                {{item.dataNascimentoContato}}
+
+                                <v-card-title>
+
+                                    <h2><strong>{{item.nomeContato}}</strong></h2>
+
+                                </v-card-title>
 
                             </v-row>
+
+                            <v-col cols="12">
+
+                                <v-row justify="space-around">
+                                    
+                                    <v-icon>mdi-cake</v-icon> 
+                                    <v-spacer></v-spacer>
+                                    {{item.dataNascimentoContato}}
+
+                                </v-row>
+
+                            </v-col>
+
+                            <v-divider></v-divider>
+
+                            <v-col cols="12">
+                        
+                                <v-row style="padding: 5px">
+                                    <v-icon>mdi-phone</v-icon>: 
+                                    <v-spacer></v-spacer>
+                                    {{ item.telefoneContato }}
+                                </v-row>
+
+                                <v-row style="padding: 5px">
+                                    <v-icon>mdi-mail</v-icon>: 
+                                    <v-spacer></v-spacer>
+                                    {{ item.emailContato }}
+                                </v-row>
+
+                            </v-col>
+
+                            <v-divider></v-divider>
+
+                            <v-col cols="12">
+                        
+                                <v-row justify="space-around" style="padding: 5px">
+
+                                    <v-btn
+                                        :href="item.facebookContato"
+                                        target="_blank"
+                                        dark
+                                        color="#3b5998"
+                                        icon>
+                                        <v-icon size="25px">mdi-facebook</v-icon>
+                                    </v-btn>
+
+                                    <v-btn
+                                        :href="item.instagramContato"
+                                        target="_blank"
+                                        dark
+                                        color="pink"
+                                        icon>
+                                        <v-icon size="25px">mdi-instagram</v-icon>
+                                    </v-btn>
+
+                                    <v-btn
+                                        :href="item.twitterContato"
+                                        target="_blank"
+                                        dark
+                                        color="#1DA1F2"
+                                        icon>
+                                        <v-icon size="25px">mdi-twitter</v-icon>
+                                    </v-btn>
+
+                                    <v-btn
+                                        :href="item.linkedinContato"
+                                        target="_blank"
+                                        dark
+                                        color="#2867B2"
+                                        icon>
+                                        <v-icon size="25px">mdi-linkedin</v-icon>
+                                    </v-btn>
+
+                                </v-row>
+
+                            </v-col>
 
                         </v-col>
 
-                        <v-divider></v-divider>
-
-                        <v-col cols="12">
-                    
-                            <v-row style="padding: 5px">
-                                <v-icon>mdi-phone</v-icon>: 
-                                <v-spacer></v-spacer>
-                                {{ item.telefoneContato }}
-                            </v-row>
-
-                            <v-row style="padding: 5px">
-                                <v-icon>mdi-mail</v-icon>: 
-                                <v-spacer></v-spacer>
-                                {{ item.emailContato }}
-                            </v-row>
-
-                        </v-col>
-
-                        <v-divider></v-divider>
-
-                        <v-col cols="12">
-                    
-                            <v-row justify="space-around" style="padding: 5px">
-
-                                <v-btn
-                                    :href="item.facebookContato"
-                                    target="_blank"
-                                    dark
-                                    color="blue"
-                                    icon>
-                                    <v-icon size="25px">mdi-facebook</v-icon>
-                                </v-btn>
-
-                                <v-btn
-                                    :href="item.instagramContato"
-                                    target="_blank"
-                                    dark
-                                    color="pink"
-                                    icon>
-                                    <v-icon size="25px">mdi-instagram</v-icon>
-                                </v-btn>
-
-                                <v-btn
-                                    :href="item.twitterContato"
-                                    target="_blank"
-                                    dark
-                                    color="blue"
-                                    icon>
-                                    <v-icon size="25px">mdi-twitter</v-icon>
-                                </v-btn>
-
-                                <v-btn
-                                    :href="item.linkedinContato"
-                                    target="_blank"
-                                    dark
-                                    color="blue"
-                                    icon>
-                                    <v-icon size="25px">mdi-linkedin</v-icon>
-                                </v-btn>
-
-                            </v-row>
-
-                        </v-col>
-
-                    </v-col>
-
-                </v-card>
+                    </v-card>
 
                 </v-dialog>
 
@@ -263,7 +263,6 @@
                 { text: 'Nome', value: 'nomeContato', class: "black--text  font-weight-bold" },
                 { text: 'E-mail', value: 'emailContato', class: "black--text  font-weight-bold" },
                 { text: 'Telefone', value: 'telefoneContato', class: "black--text  font-weight-bold" },
-                { text: 'Data Nascimento', value: 'dataNascimentoContato', class: "black--text  font-weight-bold" },
                 { 
                     text: 'Ações', 
                     value: 'acoes', 
