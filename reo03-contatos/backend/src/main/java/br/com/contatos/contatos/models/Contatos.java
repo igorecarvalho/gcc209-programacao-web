@@ -36,4 +36,16 @@ public class Contatos implements Serializable {
     @Column(name="dataNascimento_contato")
     public String dataNascimentoContato;
 
+    @Column(name="facebook_contato")
+    public String facebookContato;
+
+    @Column(name="linkedin_contato")
+    public String linkedinContato;
+
+    @Column(name="twitter_contato")
+    public String twitterContato;
+
+    @Column(name="instagram_contato")
+    public String instagramContato;
+
 }

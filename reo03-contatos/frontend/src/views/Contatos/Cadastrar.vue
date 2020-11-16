@@ -52,6 +52,7 @@
                             >
 
                             <v-text-field
+                                prepend-inner-icon="mdi-calendar"
                                 v-model="contato.dataNascimentoContato"
                                 label="Data Nascimento"
                             ></v-text-field>
@@ -79,6 +80,7 @@
                             >
 
                             <v-text-field
+                                prepend-inner-icon="mdi-mail"
                                 v-model="contato.emailContato"
                                 label="E-mail"
                             ></v-text-field>
@@ -92,6 +94,7 @@
                             >
 
                             <v-text-field
+                                prepend-inner-icon="mdi-phone"
                                 v-model="contato.telefoneContato"
                                 label="Telefone"
                             ></v-text-field>
@@ -100,6 +103,79 @@
 
                     </v-row>
 
+                    <v-row style="margin: 10px">
+                        <v-toolbar-title>
+
+                                <strong>
+                                    Redes Sociais
+                                </strong>
+
+                        </v-toolbar-title>
+                    </v-row>
+
+                    <v-row>
+
+                        <v-col
+                            cols="12"
+                            sm="6"
+                            md="6"
+                            >
+
+                            <v-text-field
+                                prepend-inner-icon="mdi-facebook"
+                                v-model="contato.facebookContato"
+                                label="Facebook"
+                            ></v-text-field>
+
+                        </v-col>
+
+                        <v-col
+                            cols="12"
+                            sm="6"
+                            md="6"
+                            >
+
+                            <v-text-field
+                                prepend-inner-icon="mdi-instagram"
+                                v-model="contato.instagramContato"
+                                label="Instagram"
+                            ></v-text-field>
+
+                        </v-col>
+
+                    </v-row>
+
+                    <v-row>
+
+                        <v-col
+                            cols="12"
+                            sm="6"
+                            md="6"
+                            >
+
+                            <v-text-field
+                                prepend-inner-icon="mdi-twitter"
+                                v-model="contato.twitterContato"
+                                label="Twitter"
+                            ></v-text-field>
+
+                        </v-col>
+
+                        <v-col
+                            cols="12"
+                            sm="6"
+                            md="6"
+                            >
+
+                            <v-text-field
+                                prepend-inner-icon="mdi-linkedin"
+                                v-model="contato.linkedinContato"
+                                label="Linkedin"
+                            ></v-text-field>
+
+                        </v-col>
+
+                    </v-row>
 
                 </v-col>
 
@@ -156,6 +232,14 @@
                 telefoneContato: null,
 
                 dataNascimentoContato: null,
+
+                facebookContato: null,
+                
+                linkedinContato: null,
+
+                twitterContato: null,
+
+                instagramContato: null,
             },
 
         }),

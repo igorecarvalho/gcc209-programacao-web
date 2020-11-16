@@ -9,7 +9,7 @@
                 <v-toolbar-title>
                     <h2>
                         <strong>
-                            Cadastro de contato
+                            Editar de contato {{contato.nomeContato}}
                         </strong>
                     </h2>
                 </v-toolbar-title>
@@ -18,7 +18,17 @@
 
             <v-card flat>
                 
-                <v-col cols="12">
+                <v-col cols="12" style="padding: 20px">
+
+                    <v-row style="margin: 10px">
+                        <v-toolbar-title>
+
+                                <strong>
+                                    Informações pessoais
+                                </strong>
+
+                        </v-toolbar-title>
+                    </v-row>
 
                     <v-row>
 
@@ -42,8 +52,93 @@
                             >
 
                             <v-text-field
+                                prepend-inner-icon="mdi-calendar"
+                                v-model="contato.dataNascimentoContato"
+                                label="Data Nascimento"
+                            ></v-text-field>
+
+                        </v-col>
+
+                    </v-row>
+
+                    <v-row style="margin: 10px">
+                        <v-toolbar-title>
+
+                                <strong>
+                                    Contato
+                                </strong>
+
+                        </v-toolbar-title>
+                    </v-row>
+
+                    <v-row>
+
+                        <v-col
+                            cols="12"
+                            sm="6"
+                            md="6"
+                            >
+
+                            <v-text-field
+                                prepend-inner-icon="mdi-mail"
                                 v-model="contato.emailContato"
                                 label="E-mail"
+                            ></v-text-field>
+
+                        </v-col>
+
+                        <v-col
+                            cols="12"
+                            sm="6"
+                            md="6"
+                            >
+
+                            <v-text-field
+                                prepend-inner-icon="mdi-phone"
+                                v-model="contato.telefoneContato"
+                                label="Telefone"
+                            ></v-text-field>
+
+                        </v-col>
+
+                    </v-row>
+
+                    <v-row style="margin: 10px">
+                        <v-toolbar-title>
+
+                                <strong>
+                                    Redes Sociais
+                                </strong>
+
+                        </v-toolbar-title>
+                    </v-row>
+
+                    <v-row>
+
+                        <v-col
+                            cols="12"
+                            sm="6"
+                            md="6"
+                            >
+
+                            <v-text-field
+                                prepend-inner-icon="mdi-facebook"
+                                v-model="contato.facebookContato"
+                                label="Facebook"
+                            ></v-text-field>
+
+                        </v-col>
+
+                        <v-col
+                            cols="12"
+                            sm="6"
+                            md="6"
+                            >
+
+                            <v-text-field
+                                prepend-inner-icon="mdi-instagram"
+                                v-model="contato.instagramContato"
+                                label="Instagram"
                             ></v-text-field>
 
                         </v-col>
@@ -59,8 +154,9 @@
                             >
 
                             <v-text-field
-                                v-model="contato.telefoneContato"
-                                label="Telefone"
+                                prepend-inner-icon="mdi-twitter"
+                                v-model="contato.twitterContato"
+                                label="Twitter"
                             ></v-text-field>
 
                         </v-col>
@@ -72,8 +168,9 @@
                             >
 
                             <v-text-field
-                                v-model="contato.dataNascimentoContato"
-                                label="Data Nascimento"
+                                prepend-inner-icon="mdi-linkedin"
+                                v-model="contato.linkedinContato"
+                                label="Linkedin"
                             ></v-text-field>
 
                         </v-col>

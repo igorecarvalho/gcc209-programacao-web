@@ -43,6 +43,139 @@
 
             <template v-slot:item.acoes="{ item }">
 
+                <v-dialog  v-model="dialog_visualizar[item.id]"
+                            :retain-focus="false"
+                            max-width="300">
+
+                    <template v-slot:activator="{ on, attrs }">
+
+                        <v-btn
+                            class="mr-2"
+                            icon
+                            color="green"
+                            v-bind="attrs"
+                            v-on="on">
+                            <v-icon size="25px"> 
+                                mdi-eye 
+                            </v-icon>
+                        </v-btn>
+
+                    </template>
+                    
+                <v-card
+                    fluid
+                    justify="space-around"
+                    class="mx-auto"
+                    max-width="600"
+                    height="434"
+                    tile>
+
+                    <v-col cols="12">
+
+                        <v-row justify="space-around" style="padding: 15px">
+
+                            <v-avatar
+                                size="100px">
+                                <img
+                                    src="https://cdn.vuetifyjs.com/images/john.jpg"
+                                    alt="John"
+                                >
+                            </v-avatar>
+
+                        </v-row>
+
+                        <v-row justify="space-around">
+
+                            <v-card-title>
+
+                                <h2><strong>{{item.nomeContato}}</strong></h2>
+
+                            </v-card-title>
+
+                        </v-row>
+
+                        <v-col cols="12">
+
+                            <v-row justify="space-around">
+                                
+                                <v-icon>mdi-cake</v-icon> 
+                                <v-spacer></v-spacer>
+                                {{item.dataNascimentoContato}}
+
+                            </v-row>
+
+                        </v-col>
+
+                        <v-divider></v-divider>
+
+                        <v-col cols="12">
+                    
+                            <v-row style="padding: 5px">
+                                <v-icon>mdi-phone</v-icon>: 
+                                <v-spacer></v-spacer>
+                                {{ item.telefoneContato }}
+                            </v-row>
+
+                            <v-row style="padding: 5px">
+                                <v-icon>mdi-mail</v-icon>: 
+                                <v-spacer></v-spacer>
+                                {{ item.emailContato }}
+                            </v-row>
+
+                        </v-col>
+
+                        <v-divider></v-divider>
+
+                        <v-col cols="12">
+                    
+                            <v-row justify="space-around" style="padding: 5px">
+
+                                <v-btn
+                                    :href="item.facebookContato"
+                                    target="_blank"
+                                    dark
+                                    color="blue"
+                                    icon>
+                                    <v-icon size="25px">mdi-facebook</v-icon>
+                                </v-btn>
+
+                                <v-btn
+                                    :href="item.instagramContato"
+                                    target="_blank"
+                                    dark
+                                    color="pink"
+                                    icon>
+                                    <v-icon size="25px">mdi-instagram</v-icon>
+                                </v-btn>
+
+                                <v-btn
+                                    :href="item.twitterContato"
+                                    target="_blank"
+                                    dark
+                                    color="blue"
+                                    icon>
+                                    <v-icon size="25px">mdi-twitter</v-icon>
+                                </v-btn>
+
+                                <v-btn
+                                    :href="item.linkedinContato"
+                                    target="_blank"
+                                    dark
+                                    color="blue"
+                                    icon>
+                                    <v-icon size="25px">mdi-linkedin</v-icon>
+                                </v-btn>
+
+                            </v-row>
+
+                        </v-col>
+
+                    </v-col>
+
+                </v-card>
+
+                </v-dialog>
+
                 <v-btn
                     class="mr-2"
                     router :to="editar + item.id" 
@@ -120,6 +253,8 @@
 
             dialog_cancelar: [],
 
+            dialog_visualizar: [],
+
             cadastrar: 'cadastrar-contato',
 
             editar: '/contato/editar/',
@@ -181,6 +316,7 @@
 
             cancelarDialogo(){
                 this.dialog_cancelar = []
+                this.dialog_visualizar = []
             },
 
         },
