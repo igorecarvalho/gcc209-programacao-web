@@ -46,10 +46,10 @@ public class ContatosController {
     }
 
     @CrossOrigin
-    @DeleteMapping("/{id}/deletar")
-    public void deletar(@RequestBody Contatos contato) {
+    @DeleteMapping("/{idContato}/deletar")
+    public void deletar(@PathVariable(value="idContato") Long idContato) {
 
-        contatosService.deletar(contato);
+        contatosService.deletar(idContato);
     }
 
 

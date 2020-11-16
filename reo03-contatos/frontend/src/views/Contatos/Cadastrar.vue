@@ -18,7 +18,17 @@
 
             <v-card flat>
                 
-                <v-col cols="12">
+                <v-col cols="12" style="padding: 20px">
+
+                    <v-row style="margin: 10px">
+                        <v-toolbar-title>
+
+                                <strong>
+                                    Informações pessoais
+                                </strong>
+
+                        </v-toolbar-title>
+                    </v-row>
 
                     <v-row>
 
@@ -42,15 +52,38 @@
                             >
 
                             <v-text-field
-                                v-model="contato.emailContato"
-                                label="E-mail"
+                                v-model="contato.dataNascimentoContato"
+                                label="Data Nascimento"
                             ></v-text-field>
 
                         </v-col>
 
                     </v-row>
 
+                    <v-row style="margin: 10px">
+                        <v-toolbar-title>
+
+                                <strong>
+                                    Contato
+                                </strong>
+
+                        </v-toolbar-title>
+                    </v-row>
+
                     <v-row>
+
+                        <v-col
+                            cols="12"
+                            sm="6"
+                            md="6"
+                            >
+
+                            <v-text-field
+                                v-model="contato.emailContato"
+                                label="E-mail"
+                            ></v-text-field>
+
+                        </v-col>
 
                         <v-col
                             cols="12"
@@ -65,20 +98,8 @@
 
                         </v-col>
 
-                        <v-col
-                            cols="12"
-                            sm="6"
-                            md="6"
-                            >
-
-                            <v-text-field
-                                v-model="contato.dataNascimentoContato"
-                                label="Data Nascimento"
-                            ></v-text-field>
-
-                        </v-col>
-
                     </v-row>
+
 
                 </v-col>
 

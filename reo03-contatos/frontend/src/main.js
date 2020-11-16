@@ -5,10 +5,11 @@ import store from './store'
 import vuetify from './plugins/vuetify';
 import VueToast from 'vue-toast-notification';
 
+
 Vue.config.productionTip = false
 
 Vue.use(VueToast, {
-    duration: 4000,
+    duration: 6000,
     position: 'top-right',
 })
 

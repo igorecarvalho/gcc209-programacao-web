@@ -119,6 +119,7 @@
 <script>
 
     import ContatosServices from "../../services/contatosService";
+    import 'vue-toast-notification/dist/theme-sugar.css';
 
     export default {
 
@@ -153,12 +154,11 @@
 
             ContatosServices.getContato(this.contatoId)
                         .then( resposta => {
-                            console.log(resposta.data)
                             this.contato = resposta.data
                             console.log(this.contato)
                         }).catch(error => {
                             console.log(error.response.data.message)
-                            this.$toast.error('Erro ao editar sprint!')
+                            this.$toast.error('Erro ao editar contato!')
                             this.$toast.error("Erro: " + error.response.data.message)
                         })
         },
@@ -166,12 +166,8 @@
         methods: {
 
             submit () {
-
-                console.log(this.contato)
-                console.log(this.contato.id)
                 ContatosServices.editar(this.contato, this.contato.id)
-                    .then(resposta => {
-                        console.log(resposta)
+                    .then(() => {
                         this.$toast.success('Contato editado com sucesso!')
                         window.location.href = this.voltar
                     })

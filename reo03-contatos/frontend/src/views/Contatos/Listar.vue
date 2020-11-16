@@ -50,12 +50,56 @@
                     <v-icon color="blue" size="25px"> mdi-pencil </v-icon>
                 </v-btn>
 
-                <v-btn
-                    class="mr-2"
-                    @click="deletar(item.id)"
-                    icon>
-                    <v-icon color="red" size="25px"> mdi-delete </v-icon>
-                </v-btn>
+                <v-dialog  v-model="dialog_cancelar[item.id]"
+                            persistent 
+                            :retain-focus="false"
+                            max-width="300">
+
+                    <template v-slot:activator="{ on, attrs }">
+
+                        <v-btn
+                            class="mr-2"
+                            icon
+                            color="red"
+                            v-bind="attrs"
+                            v-on="on">
+                            <v-icon size="25px"> 
+                                mdi-delete 
+                            </v-icon>
+                        </v-btn>
+
+                    </template>
+                    
+                    <v-card>
+                        
+                        <v-card-title class="headline">
+                            <strong><h2>Atenção!</h2></strong>
+                        </v-card-title>
+                        
+                        <v-card-text>
+                                Deseja realmente deletar o contato: 
+                                <p><strong> {{item.nomeContato}} </strong>?</p>
+                        </v-card-text>
+
+                        <v-card-actions>
+
+                            <v-spacer></v-spacer>
+
+                            <v-btn  color="red darken-1" 
+                                    text @click="cancelarDialogo(item.id)">
+                                Não
+                            </v-btn>
+
+                            <v-btn  color="green darken-1 white--text" 
+                                    @click="deletar(item.id)">
+                                Sim
+                            </v-btn>
+
+                        </v-card-actions>
+
+                    </v-card>
+
+                </v-dialog>
 
             </template>
 
@@ -74,15 +118,17 @@
 
         data: () => ({
 
+            dialog_cancelar: [],
+
             cadastrar: 'cadastrar-contato',
 
             editar: '/contato/editar/',
 
             headers: [
-                { text: 'Nome', value: 'nomeContato' },
-                { text: 'E-mail', value: 'emailContato' },
-                { text: 'Telefone', value: 'telefoneContato' },
-                { text: 'Data Nascimento', value: 'dataNascimentoContato' },
+                { text: 'Nome', value: 'nomeContato', class: "black--text  font-weight-bold" },
+                { text: 'E-mail', value: 'emailContato', class: "black--text  font-weight-bold" },
+                { text: 'Telefone', value: 'telefoneContato', class: "black--text  font-weight-bold" },
+                { text: 'Data Nascimento', value: 'dataNascimentoContato', class: "black--text  font-weight-bold" },
                 { 
                     text: 'Ações', 
                     value: 'acoes', 
@@ -118,18 +164,23 @@
             },
 
             deletar(contato) {
+
                 console.log(contato)
-                ContatosServices.deletar(contato, contato.id)
+
+                ContatosServices.deletar(contato)
                         .then( () => {
-                            this.$toast.error('Contatos deletado!')
+                            this.$toast.success('Contato deletado com sucesso!')
                             this.listar()
                         })
                         .catch(error => {
-                            console.log('erroww')
                             console.log(error)
                             this.$toast.error('Erro ao deletar contatos!')
                         })
 
+            },
+
+            cancelarDialogo(){
+                this.dialog_cancelar = []
             },
 
         },

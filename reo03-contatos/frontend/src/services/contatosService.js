@@ -19,8 +19,8 @@ const contatoService =  {
         return ApiService.put(`contatos/${id}/editar`, contato);
     },
 
-    deletar: async(contato, id) => {
-        return ApiService.delete(`contatos/${id}/deletar`, contato);
+    deletar: async(id) => {
+        return ApiService.delete(`contatos/${id}/deletar`);
     },
 
 }

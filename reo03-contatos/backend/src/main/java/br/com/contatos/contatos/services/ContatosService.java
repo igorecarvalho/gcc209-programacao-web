@@ -40,7 +40,9 @@ public class ContatosService implements IContatosService {
     }
 
     @Override
-    public void deletar(Contatos contato) {
+    public void deletar(Long id) {
+
+        Contatos contato = contatosRepository.findFirstById(id);
 
         contatosRepository.delete(contato);
     }
