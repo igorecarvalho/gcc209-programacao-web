@@ -45,14 +45,14 @@
 
                 <v-btn
                     class="mr-2"
-                    @click="editar(item)"
+                    router :to="editar + item.id" 
                     icon>
                     <v-icon color="blue" size="25px"> mdi-pencil </v-icon>
                 </v-btn>
 
                 <v-btn
                     class="mr-2"
-                    @click="deletar(item)"
+                    @click="deletar(item.id)"
                     icon>
                     <v-icon color="red" size="25px"> mdi-delete </v-icon>
                 </v-btn>
@@ -76,6 +76,8 @@
 
             cadastrar: 'cadastrar-contato',
 
+            editar: '/contato/editar/',
+
             headers: [
                 { text: 'Nome', value: 'nomeContato' },
                 { text: 'E-mail', value: 'emailContato' },
@@ -95,15 +97,41 @@
         }),
 
         mounted(){
-            ContatosServices.listar()
+
+            this.listar()
+
+        },
+
+        methods: {
+
+
+            listar(){
+                ContatosServices.listar()
+                            .then( resposta => {
+                                console.log(resposta.data)
+                                this.contatos = resposta.data
+                            })
+                            .catch(error => {
+                                console.log(error)
+                                this.$toast.error('Erro ao carregar contatos!')
+                            })
+            },
+
+            deletar(contato) {
+                console.log(contato)
+                ContatosServices.deletar(contato, contato.id)
                         .then( resposta => {
                             console.log(resposta.data)
-                            this.contatos = resposta.data
+                            this.$toast.error('Contatos deletado!')
+                            this.listar()
                         })
                         .catch(error => {
                             console.log(error)
                             this.$toast.error('Erro ao carregar contatos!')
                         })
+
+            },
+
         },
 
     }

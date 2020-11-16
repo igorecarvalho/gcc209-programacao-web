@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(value="/contatos")
-@CrossOrigin(origins = "*")
 public class ContatosController {
 
     @Autowired
@@ -36,10 +36,18 @@ public class ContatosController {
         return new ResponseEntity<>(contatosService.cadastrar(contato), HttpStatus.OK);
     }
 
-    @PutMapping("/{id}/editar")
-    public ResponseEntity<Contatos> editar(@Valid @RequestBody Contatos contato, BindingResult br){
+    @CrossOrigin
+    @PutMapping("/editar")
+    public ResponseEntity<Contatos> editar(@RequestBody Contatos contato){
 
         return new ResponseEntity<>(contatosService.editar(contato), HttpStatus.OK);
+    }
+
+    @CrossOrigin
+    @DeleteMapping("/{id}/deletar")
+    public void deletar(@RequestBody Contatos contato) {
+
+        contatosService.deletar(contato);
     }
 
 

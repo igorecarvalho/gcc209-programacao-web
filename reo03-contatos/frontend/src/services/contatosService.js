@@ -19,6 +19,10 @@ const contatoService =  {
         return ApiService.post(`contatos/${id}/editar`, contato);
     },
 
+    deletar: async(id) => {
+        return ApiService.post(`contatos/${id}/deletar`);
+    },
+
 }
 
 export default contatoService;

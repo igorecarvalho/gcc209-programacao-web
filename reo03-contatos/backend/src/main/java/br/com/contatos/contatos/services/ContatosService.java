@@ -5,10 +5,12 @@ import br.com.contatos.contatos.models.Contatos;
 import br.com.contatos.contatos.repository.ContatosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.List;
 
 @Service
+@CrossOrigin(origins = "*")
 public class ContatosService implements IContatosService {
 
     @Autowired
@@ -38,7 +40,7 @@ public class ContatosService implements IContatosService {
     }
 
     @Override
-    public void excluir(Contatos contato) {
+    public void deletar(Contatos contato) {
 
         contatosRepository.delete(contato);
     }

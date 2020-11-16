@@ -11,7 +11,7 @@ public interface IContatosService {
 
     Contatos editar(Contatos contato);
 
-    void excluir(Contatos contato);
+    void deletar(Contatos contato);
 
     Contatos listarContatoUnico(Long idContato);
 }
