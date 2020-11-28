@@ -81,6 +81,7 @@
 
                             <v-text-field
                                 v-model.lazy="contato.cepContato"
+                                v-on:keyup="attEndereco"
                                 mask='"#####-###"'
                                 label="CEP"
                             ></v-text-field>
