@@ -23,6 +23,7 @@ public class AnimalService implements IAnimalService {
 
     @Override
     public List<Animal> listar() {
+
         return animalRepository.findAll();
     }
 }

@@ -139,34 +139,25 @@
     import AnimaisServices from "../../services/animalService";
 
     export default {
-
         data: () => ({
             
             headers: [
-
                 { text: 'Nome', value: 'nomeAnimal', class: "black--text  font-weight-bold" },
                 { text: 'Tipo', value: 'tipoAnimal', class: "black--text  font-weight-bold" },
                 { text: 'Idade', value: 'idadeAnimal', class: "black--text  font-weight-bold" },
-
             ],
 
             animal: {
-
                 nomeAnimal: null,
-
                 tipoAnimal: null,
-
                 idadeAnimal: null,
             },
 
             animais: [],
-
         }),
 
         mounted(){
-
             this.listar()
-
         },
 
         methods: {
@@ -183,9 +174,9 @@
                         this.listar()
                     })
             },
-
+            
             listar(){
-
+                
                 AnimaisServices.listar()
                             .then( resposta => {
                                 console.log(resposta.data)

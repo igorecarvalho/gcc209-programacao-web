@@ -1,6 +1,6 @@
 <template>
 
-    <div id="app">
+  <div id="app">
 
         <v-app>
 
@@ -8,19 +8,17 @@
 
         </v-app>
 
-    </div>
+  </div>
 
 </template>
 
 <script>
 
-
 export default {
-    name: 'App',
-    components: {
-    }
+  name: 'App',
 }
 </script>
 
 <style>
+
 </style>
