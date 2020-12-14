@@ -11,5 +11,5 @@ public interface ComentariosRepository  extends JpaRepository<Comentarios, Long>
 
     Comentarios findFirstById(Long id);
 
-    List<Comentarios> findAllByPost(Post post);
+    List<Comentarios> findAllByPost_Id(Long id);
 }

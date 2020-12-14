@@ -10,7 +10,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-@Table(name="POST", schema = "trabalho_gcc209")
+@Table(name="POSTAGEM", schema = "trabalho_gcc209")
 public class Post implements Serializable {
 
     @Id
@@ -23,8 +23,5 @@ public class Post implements Serializable {
 
     @ManyToOne
     private Usuario usuario;
-
-    @OneToMany
-    private List<Comentarios> comentarios;
 
 }

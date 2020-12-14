@@ -24,6 +24,13 @@ public class PostController {
     }
 
     @CrossOrigin
+    @GetMapping("/get/{idPost}")
+    public ResponseEntity<Post> getPost(@PathVariable(value="idPost") Long idPost){
+
+        return new ResponseEntity<>(postService.getPost(idPost), HttpStatus.OK);
+    }
+
+    @CrossOrigin
     @GetMapping("/{idUsuario}/listar")
     public ResponseEntity<List> listarPostPorUsuario(@PathVariable(value="idUsuario") Long idUsuario){
 

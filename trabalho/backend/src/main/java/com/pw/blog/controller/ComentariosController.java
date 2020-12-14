@@ -32,9 +32,9 @@ public class ComentariosController {
 
     @CrossOrigin
     @PostMapping("/cadastrar")
-    public ResponseEntity<Comentarios> cadastrar(@RequestBody Comentarios comentarios){
+    public ResponseEntity<Comentarios> cadastrar(@RequestBody Comentarios comentario){
 
-        return new ResponseEntity<>(comentariosService.cadastrar(comentarios), HttpStatus.OK);
+        return new ResponseEntity<>(comentariosService.cadastrar(comentario), HttpStatus.OK);
     }
 
     @CrossOrigin

@@ -32,6 +32,16 @@ public class Usuario implements Serializable {
 
     private String senha;
 
+    public String cep;
+
+    public String logradouro;
+
+    public String bairro;
+
+    public String localidade;
+
+    public String uf;
+
     @OneToMany
     private List<Post> postagens;
 

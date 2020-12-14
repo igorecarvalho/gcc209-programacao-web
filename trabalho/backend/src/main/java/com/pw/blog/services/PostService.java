@@ -5,6 +5,7 @@ import com.pw.blog.model.Usuario;
 import com.pw.blog.repository.PostRepository;
 import com.pw.blog.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
@@ -22,7 +23,7 @@ public class PostService {
 
     public List<Post> listarTodos(){
 
-        return postRepository.findAll();
+        return postRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
     }
 
     public List<Post> listarPorUsuario(Long idUsuario){
@@ -34,6 +35,11 @@ public class PostService {
     public Post cadastrar(Post post){
 
         return postRepository.save(post);
+    }
+
+    public Post getPost(Long id){
+
+        return postRepository.findFirstById(id);
     }
 
     public Post editar(Post post){

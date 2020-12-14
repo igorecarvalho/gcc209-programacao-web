@@ -5,6 +5,7 @@ import com.pw.blog.model.Post;
 import com.pw.blog.model.Usuario;
 import com.pw.blog.repository.ComentariosRepository;
 import com.pw.blog.repository.PostRepository;
+import org.hibernate.annotations.OrderBy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -30,7 +31,7 @@ public class ComentariosService {
 
         Post post = postRepository.findFirstById(id);
 
-        return comentariosRepository.findAllByPost(post);
+        return comentariosRepository.findAllByPost_Id(id);
 
     }
 

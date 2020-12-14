@@ -16,7 +16,6 @@
                             >
 
                             <v-text-field
-                                id="texto"
                                 hide-details="auto"
                                 outlined
                                 v-model="post.titulo"
@@ -34,7 +33,6 @@
                             >
 
                             <v-textarea
-                                id="texto"
                                 hide-details="auto"
                                 outlined
                                 rows="4"
@@ -124,27 +122,26 @@
 
                                 <v-divider></v-divider>
 
-                                <v-col
-                                    v-for="comentario in card.comentarios"
-                                    :key="comentario.id">
-
-                                        <v-card-text>
-                                            {{ comentario.usuario.nome }}
-                                        </v-card-text>
-
-                                        <v-card-text>
-                                            {{ comentario.mensagem }}
-                                        </v-card-text>                                        
-
-                                </v-col>
-
                                 <v-col>
 
+                                    <v-row
+                                        v-for="comentario in card.comentarios"
+                                        :key="comentario.id">
+                                        
+                                            <v-card-text>
+                                                {{ comentario.usuario.nome }}
+                                            </v-card-text>
+
+                                            <v-card-text>
+                                                {{ comentario.mensagem }}
+                                            </v-card-text>                                        
+
+                                    </v-row>
+
                                     <v-text-field
-                                        id="texto"
                                         hide-details="auto"
                                         outlined
-                                        v-model="novoComentario"
+                                        v-model="comentario"
                                         label="digite o comentario..."
                                     ></v-text-field>
 
@@ -186,41 +183,50 @@
 
 <script>
 
-    import PostServices from "../services/postService";
-    import UsuarioService from "../services/usuarioService";
+    import PostServices from "../../services/postService";
+    import UsuarioService from "../../services/usuarioService";
+    import ComentarioService from "../../services/comentarioService";
 
     export default {
         data: () => ({
 
-            usuario: null,
-
-            novoComentario: null,
+            usuarioID: null,
 
             show: false,
 
+            comentario: null,
+
+            novoComentario: {
+                id: null,
+                mensagem: null,
+                usuario: null,
+                post: null,
+            },
+
             post: {
+                id: null,
                 titulo: null,
                 mensagem: null,
                 usuario: null,
             },
 
             posts: [],
+            comments: null,
+
         }),
 
         mounted(){
-            
-            UsuarioService.getUsuario((window.location.pathname).split('/').[2])
+            console.log((window.location.pathname).split('/')[2])
+            UsuarioService.getUsuario((window.location.pathname).split('/')[2])
                 .then(resposta => {
-                        console.log(resposta.data)
                         this.post.usuario = resposta.data
+                        this.usuarioID = resposta.data.id
                         this.listar()
                     })
                     .catch(error => {
                         console.log(error)
                         this.listar()
                     })
-
-            this.listar()
         },
 
         methods: {
@@ -230,31 +236,88 @@
                 PostServices.cadastrar(this.post)
                     .then(resposta => {
                         console.log(resposta.data)
+                        this.$toast.success("Postagem realizado com sucesso")
                         this.listar()
                     })
                     .catch(error => {
                         console.log(error)
+                        this.$toast.error("Erro ao realizar postagens")
                         this.listar()
                     })
             },
 
             comentar(idPost) {
 
-                console.log(idPost, this.novoComentario)
+                PostServices.getPost(idPost)
+                    .then(resposta => {
+                        this.novoComentario.post = resposta.data
+                        this.novoComentario.usuario = this.post.usuario
+                        this.novoComentario.mensagem = this.comentario
+                    })
+                    .catch(error => {
+                        console.log(error)
+                        this.$toast.error("Erro ao carregar post para comentar")
+                    })
+                
+                console.log(idPost)
+                console.log("comentario aqui", this.novoComentario)
+                
+                ComentarioService.cadastrar(this.novoComentario)
+                    .then(resposta => {
+                        console.log(resposta.data)
+                        console.log("comentou")
+                        this.$toast.success("Comentario realizado com sucesso")
+                    })
+                    .catch(error => {
+                        console.log(error)
+                        this.$toast.error("Erro ao realizar comentario")
+                    })
             },
             
             listar(){
                 
-                PostServices.listar()
+                PostServices.listarPorUser(this.usuarioID)
                             .then( resposta => {
-                                console.log(resposta.data)
                                 this.posts = resposta.data
+                                
+                                for (const key in this.posts) {
+                                    console.log("KEY", key)
+                                    if (Object.hasOwnProperty.call(this.posts, key)) {
+                                        console.log("id", this.posts[key].id)
+                                        ComentarioService.listarPorPostagem(this.posts[key].id)
+                                            .then ( resposta => {
+                                                this.posts[key].comentarios = resposta.data
+                                            })
+                                            .catch(error => {
+                                                console.log("ERROWWW", error)
+                                                this.$toast.error("Erro ao carregar comentarios")
+                                            })
+
+
+                                    }
+                                }
+                                console.log(this.posts)
+                                this.$toast.success("Sucesso ao carregar postagens")
                             })
                             .catch(error => {
-                                console.log(error)
+                                console.log("AAUIAUIAS", error)
+                                this.$toast.error("Erro ao carregar postagens")
                             })
+
             },
 
+            carregarComentarios(idPost){
+                ComentarioService.listarPorPostagem(idPost)
+                    .then ( resposta => {
+                        this.comments = resposta.data
+                        console.log("acertou", this.comments)
+                        return this.comments
+                    })
+                    .catch(error => {
+                        console.log("ERROWWW", error)
+                        this.$toast.error("Erro ao carregar comentarios")
+                    })
+            }
             
         },
     }
