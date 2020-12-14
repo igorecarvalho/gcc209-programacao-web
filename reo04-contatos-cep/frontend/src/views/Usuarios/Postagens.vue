@@ -1,6 +1,6 @@
 <template>
 
-   <v-container>
+   <v-container style="max-width: 600px">
 
         <form>
             <v-card id="nova-publicacao" flat>
@@ -79,10 +79,15 @@
 
                     <v-card id="publicacoes" >
 
-                        <v-img
-                            src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
-                            height="400px">
-                        </v-img>
+                        <v-card class="img-card">
+
+                            <v-img
+                                max-height="600px"
+                                src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
+                                >
+                            </v-img>
+
+                        </v-card>
 
                         <v-card-title>
                            {{ card.titulo }}
@@ -253,56 +258,55 @@
                         this.novoComentario.post = resposta.data
                         this.novoComentario.usuario = this.post.usuario
                         this.novoComentario.mensagem = this.comentario
+
+                        ComentarioService.cadastrar(this.novoComentario)
+                            .then(resposta => {
+                                console.log(resposta.data)
+                                console.log("comentou")
+                                this.$toast.success("Comentario realizado com sucesso")
+                                this.listar()
+                            })
+                            .catch(error => {
+                                console.log(error)
+                                this.$toast.error("Erro ao realizar comentario")
+                            })
                     })
                     .catch(error => {
                         console.log(error)
                         this.$toast.error("Erro ao carregar post para comentar")
                     })
-                
-                console.log(idPost)
-                console.log("comentario aqui", this.novoComentario)
-                
-                ComentarioService.cadastrar(this.novoComentario)
-                    .then(resposta => {
-                        console.log(resposta.data)
-                        console.log("comentou")
-                        this.$toast.success("Comentario realizado com sucesso")
-                    })
-                    .catch(error => {
-                        console.log(error)
-                        this.$toast.error("Erro ao realizar comentario")
-                    })
             },
             
             listar(){
                 
+                this.show = false
                 PostServices.listarPorUser(this.usuarioID)
-                            .then( resposta => {
-                                this.posts = resposta.data
-                                
-                                for (const key in this.posts) {
-                                    console.log("KEY", key)
-                                    if (Object.hasOwnProperty.call(this.posts, key)) {
-                                        console.log("id", this.posts[key].id)
-                                        ComentarioService.listarPorPostagem(this.posts[key].id)
-                                            .then ( resposta => {
-                                                this.posts[key].comentarios = resposta.data
-                                            })
-                                            .catch(error => {
-                                                console.log("ERROWWW", error)
-                                                this.$toast.error("Erro ao carregar comentarios")
-                                            })
+                    .then( resposta => {
+                        this.posts = resposta.data
+                        
+                        for (const key in this.posts) {
+                            console.log("KEY", key)
+                            if (Object.hasOwnProperty.call(this.posts, key)) {
+                                console.log("id", this.posts[key].id)
+                                ComentarioService.listarPorPostagem(this.posts[key].id)
+                                    .then ( resposta => {
+                                        this.posts[key].comentarios = resposta.data
+                                    })
+                                    .catch(error => {
+                                        console.log("ERROWWW", error)
+                                        this.$toast.error("Erro ao carregar comentarios")
+                                    })
 
 
-                                    }
-                                }
-                                console.log(this.posts)
-                                this.$toast.success("Sucesso ao carregar postagens")
-                            })
-                            .catch(error => {
-                                console.log("AAUIAUIAS", error)
-                                this.$toast.error("Erro ao carregar postagens")
-                            })
+                            }
+                        }
+                        console.log(this.posts)
+                        this.$toast.success("Sucesso ao carregar postagens")
+                    })
+                    .catch(error => {
+                        console.log("AAUIAUIAS", error)
+                        this.$toast.error("Erro ao carregar postagens")
+                    })
 
             },
 
@@ -336,5 +340,14 @@
     #botao-comentar {
         margin: 10px;
         padding: 5px;
+    }
+
+    .img-card {
+        min-height: 100px;
+        padding: 10px;
+    }
+
+    .img-card .img {
+        height: 100%;
     }
 </style>
