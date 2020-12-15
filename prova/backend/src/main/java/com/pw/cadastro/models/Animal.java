@@ -9,7 +9,7 @@ import java.io.Serializable;
 @Entity
 @Getter
 @Setter
-@Table(name = "ANIMAL", schema = "prova_gcc209")
+@Table(name="ANIMAL", schema = "prova_gcc209")
 public class Animal implements Serializable {
 
     @Id
@@ -23,6 +23,5 @@ public class Animal implements Serializable {
     private String tipoAnimal;
 
     @Column(name = "idade_animal")
-    public Integer idadeAnimal;
-
+    private Integer idadeAnimal;
 }

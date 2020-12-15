@@ -42,7 +42,7 @@
                                 <v-textarea
                                     hide-details="auto"
                                     outlined
-                                    rows="4"
+                                    rows="3"
                                     row-height="15"
                                     v-model="post.mensagem"
                                     label="Digite aqui a sua publicacao"
@@ -114,17 +114,111 @@
 
                             </v-btn>
 
-                            <v-btn
-                                class="mr-4"
-                                icon
-                                color="blue white--text"
-                                @click="editar(card.id)"
-                                >
-                                <v-icon size="20px">
-                                    mdi-pencil
-                                </v-icon>
+                            <v-dialog
+                                v-model="dialog[card.id]"
+                                persistent
+                                max-width="500px">
 
-                            </v-btn>
+                                <template v-slot:activator="{ on, attrs }">
+
+                                    <v-btn
+                                        class="mr-4"
+                                        icon
+                                        color="green white--text"
+                                        v-bind="attrs"
+                                        v-on="on"
+                                        @click="carregarEdicao(card)">
+
+                                        <v-icon size="20px">
+                                            mdi-pencil
+                                        </v-icon>
+
+                                    </v-btn>
+
+                                </template>
+
+                                <v-card>
+
+                                    <v-card-title>
+
+                                        <span class="headline">
+                                           Edição do post {{card.id}}
+                                        </span>
+
+                                    </v-card-title>
+
+                                    <v-card-text>
+                                        
+                                        <v-col cols="12">
+
+                                            <v-row>
+
+                                                <v-col
+                                                    cols="12"
+                                                    sm="12"
+                                                    md="12"
+                                                    >
+
+                                                    <v-text-field
+                                                        hide-details="auto"
+                                                        outlined
+                                                        v-model="editado.titulo"
+                                                        label="Titulo"
+                                                    ></v-text-field>
+
+                                                </v-col>
+
+                                            </v-row>
+
+                                            <v-row>
+
+                                                <v-col
+                                                    cols="12"
+                                                    >
+
+                                                    <v-textarea
+                                                        hide-details="auto"
+                                                        outlined
+                                                        rows="3"
+                                                        row-height="15"
+                                                        v-model="editado.mensagem"
+                                                        label="Digite aqui a sua publicacao"
+                                                    ></v-textarea>
+
+                                                </v-col>
+
+                                            </v-row>
+
+                                        </v-col>
+
+                                    </v-card-text>
+                                    
+                                    <v-card-actions>
+
+                                        <v-spacer></v-spacer>
+
+                                        <v-btn
+                                            color="red darken-1"
+                                            text
+                                            @click="cancelarDialog(card.id)">
+                                            Close
+                                        </v-btn>
+
+
+
+                                        <v-btn
+                                            class="mr-4"
+                                            color="green white--text"
+                                            @click="editar(card)">
+                                            Salvar
+                                        </v-btn>
+                                            
+
+                                    </v-card-actions>
+
+                                </v-card>
+                                
+                            </v-dialog>
 
                         </v-row>
 
@@ -160,8 +254,8 @@
 
                             <v-btn
                                 icon
-                                @click="show = !show"
-                            >
+                                @click="show = !show">
+
                                 <v-icon>{{ show ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
                             </v-btn>
 
@@ -255,6 +349,8 @@
     export default {
         data: () => ({
 
+            dialog: [],
+
             usuarioID: null,
 
             show: false,
@@ -266,6 +362,11 @@
                 mensagem: null,
                 usuario: null,
                 post: null,
+            },
+
+            editado: {
+                titulo: null,
+                mensagem: null,
             },
 
             post: {
@@ -281,7 +382,7 @@
         }),
 
         mounted(){
-            console.log((window.location.pathname).split('/')[2])
+            //console.log((window.location.pathname).split('/')[2])
             UsuarioService.getUsuario((window.location.pathname).split('/')[2])
                 .then(resposta => {
                         console.log(resposta.data)
@@ -376,12 +477,34 @@
 
             },
 
-            editar (id){
+            editar(post) {
+                post.titulo = this.editado.titulo
+                post.mensagem = this.editado.mensagem
+                console.log("editado post: ", post)
+                
+                PostServices.editar(post, post.id)
+                    .then ( resposta => {
+                        console.log(resposta.data)
+                        this.$toast.success("Postagem editada com sucesso")
+                        this.dialog = []
+                        this.listar()
+                    })
+                    .catch(() => {
+                        //console.log("ERROWWW", error)
+                        this.$toast.error("Erro ao editar postagem")
+                    })
 
-                console.log("editou", id)
+
             },
 
-            deletar (id){
+            carregarEdicao(post) {
+                this.editado.titulo = post.titulo
+                this.editado.mensagem = post.mensagem
+                console.log(this.editado.titulo)
+                console.log(this.editado.mensagem)
+            },
+
+            deletar(id){
 
                 PostServices.deletar(id)
                     .then ( resposta => {
@@ -394,6 +517,12 @@
                         this.$toast.error("Erro ao deletar postagem")
                     })
             },
+
+            cancelarDialog() {
+
+                this.dialog = []
+
+            }
             
         },
     }
@@ -453,6 +582,10 @@
     .coment-comentario {
         text-align: start !important;
         font-size: 15px !important;
+    }
+
+    .v-card.v-sheet.theme--light{
+        overflow-x: hidden !important;
     }
 
 </style>

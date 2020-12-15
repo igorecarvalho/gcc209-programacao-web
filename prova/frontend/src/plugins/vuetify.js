@@ -14,4 +14,8 @@ export default new Vuetify({
         current: 'pt',
     },
 
+    icons: {
+        iconfont: 'mdi', // default - only for display purposes
+    },
+    
 })

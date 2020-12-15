@@ -10,13 +10,13 @@
             <v-app-bar-nav-icon large @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
 
             <v-toolbar-title>
-                <strong> <h1>Agenda</h1> </strong>
+                <strong> <h1>Rede de gato</h1> </strong>
             </v-toolbar-title>
 
             <v-spacer></v-spacer>
             
-            <v-avatar color="primary">
-                      <v-icon   color="white"
+            <v-avatar color="white">
+                      <v-icon   color="black"
                                 large
                                 dark>
                         mdi-account
@@ -82,9 +82,8 @@
                 drawer: null,
 
                 items: [
-                    { title: 'Home', icon: 'mdi-account' , route: '/'},
-                    { title: 'Listar Contatos', icon: 'mdi-account-details' , route: '/listar-contatos'},
-                    { title: 'Cadastrar Contatos', icon: 'mdi-account-plus', route: '/cadastrar-contato'},
+                    { title: 'Todos as postagens', icon: 'mdi-post-outline' , route: '/home'},
+                    { title: 'Minhas postagens', icon: 'mdi-account-details' , route: '/minhas-postagens'},
                 ],
             }
 

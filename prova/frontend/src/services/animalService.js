@@ -1,6 +1,7 @@
-import { ApiService } from './api.service'
+import {ApiService} from './api.service'
 
-const animalService = {
+
+const animalService =  {
 
     listar: async() => {
         return ApiService.get('animal/listar');
@@ -9,6 +10,7 @@ const animalService = {
     cadastrar: async(animal) => {
         return ApiService.post('animal/cadastrar', animal);
     }
+
 }
 
 export default animalService;

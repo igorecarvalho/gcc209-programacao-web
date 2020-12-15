@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import ListarContatos from '../views/Contatos/Listar.vue'
-import CasdastrarContato from '../views/Contatos/Cadastrar.vue'
-import EditarContato from '../views/Contatos/Editar.vue'
+import CadastrarUsuario from '../views/Usuarios/Cadastrar.vue'
+import Postagens from '../views/Usuarios/Postagens.vue'
+import Login from '../views/Login.vue'
 import Home from '../views/Home.vue'
 
 Vue.use(VueRouter)
@@ -10,23 +10,23 @@ Vue.use(VueRouter)
 const routes = [
     {
         path: '/',
-        name: 'Bem Vindo',
+        name: 'Login',
+        component: Login
+    },
+    {
+        path: '/home/:id',
+        name: 'Pagina Inicial',
         component: Home
     },
     {
-        path: '/cadastrar-contato',
-        name: 'Cadastro de Contato',
-        component: CasdastrarContato
+        path: '/minhas-postagens/:id',
+        name: 'Minhas Postagens',
+        component: Postagens
     },
     {
-        path: '/listar-contatos',
-        name: 'Listagem de contatos',
-        component: ListarContatos
-    },
-    {
-        path: '/contato/editar/:id',
-        name: 'Editar Contato',
-        component: EditarContato
+        path: '/cadastrar-usuario',
+        name: 'Cadastro de usuario',
+        component: CadastrarUsuario
     },
 ]
 
