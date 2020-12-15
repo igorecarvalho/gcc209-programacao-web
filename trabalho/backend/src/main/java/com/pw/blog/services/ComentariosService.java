@@ -29,8 +29,6 @@ public class ComentariosService {
 
     public List<Comentarios> listarPorPost(Long id){
 
-        Post post = postRepository.findFirstById(id);
-
         return comentariosRepository.findAllByPost_Id(id);
 
     }

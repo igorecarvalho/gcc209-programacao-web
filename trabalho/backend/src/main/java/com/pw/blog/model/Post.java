@@ -5,7 +5,6 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
 
 @Entity
 @Getter
@@ -21,7 +20,11 @@ public class Post implements Serializable {
 
     private String mensagem;
 
+    private String fileName;
+
     @ManyToOne
     private Usuario usuario;
 
+    public Post() {
+    }
 }

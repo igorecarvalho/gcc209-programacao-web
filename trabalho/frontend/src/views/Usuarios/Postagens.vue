@@ -52,9 +52,15 @@
 
                         </v-row>
 
-                    </v-col>
+                        <v-col cols="12">
 
-                    <v-col cols="12">
+                            <v-file-input
+                                show-size
+                                label="File input"
+                                @change="selectFile">
+                            </v-file-input>
+                            
+                        </v-col>
 
                         <v-row>
 
@@ -92,7 +98,7 @@
 
             <v-row dense>
 
-                <v-col
+                <v-col cols="12"
                     v-for="card in posts"
                     :key="card.id">
 
@@ -228,7 +234,7 @@
                                 class="imagem"
                                 max-width="auto"
                                 max-height="300px"
-                                src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
+                                :src="card.fileName"
                                 >
                             </v-img>
 
@@ -345,9 +351,15 @@
     import PostServices from "../../services/postService";
     import UsuarioService from "../../services/usuarioService";
     import ComentarioService from "../../services/comentarioService";
+    import UploadService from "../../services/UploadFilesService";
 
     export default {
         data: () => ({
+
+            currentFile: undefined,
+            progress: 0,
+            message: "",
+            fileInfos: [],
 
             dialog: [],
 
@@ -385,7 +397,7 @@
             //console.log((window.location.pathname).split('/')[2])
             UsuarioService.getUsuario((window.location.pathname).split('/')[2])
                 .then(resposta => {
-                        console.log(resposta.data)
+                        //console.log(resposta.data)
                         this.post.usuario = resposta.data
                         this.usuarioID = resposta.data.id
                         this.listar()
@@ -399,11 +411,64 @@
 
         methods: {
 
+            selectFile(file) {
+                console.log("veio")
+                this.progress = 0;
+                this.currentFile = file;
+            },
+
+
+            upload() {
+
+                if (!this.currentFile) {
+                    this.message = "Please select a file!";
+                    return;
+                }
+
+                this.message = "";
+                UploadService.upload(this.currentFile, (event) => {
+                    this.progress = Math.round((100 * event.loaded) / event.total);
+                })
+                .then((response) => {
+                    this.message = response.data.message;
+                    return UploadService.getFiles();
+                })
+                .then((files) => {
+                    this.fileInfos = files.data;
+                })
+                .catch(() => {
+                    this.progress = 0;
+                    this.message = "Could not upload the file!";
+                    this.currentFile = undefined;
+                });
+            },
+
             submit () {
+                this.post.fileName = "http://localhost:7979/files/" + this.currentFile.name
                 console.log(this.post)
                 PostServices.cadastrar(this.post)
                     .then(resposta => {
                         console.log(resposta.data)
+
+                        this.message = "";
+                        
+                        UploadService.upload(this.currentFile, (event) => {
+                            this.progress = Math.round((100 * event.loaded) / event.total);
+                        })
+                        .then((response) => {
+                            console.log(response.data)
+                            this.message = response.data.message;
+                            return UploadService.getFiles();
+                        })
+                        .then((files) => {
+                            this.fileInfos = files.data;
+                        })
+                        .catch(() => {
+                            this.progress = 0;
+                            this.message = "Could not upload the file!";
+                            this.currentFile = undefined;
+                        });
+
                         this.$toast.success("Postagem realizado com sucesso")
                         this.listar()
                         this.post.titulo = ''

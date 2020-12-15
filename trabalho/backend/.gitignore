@@ -19,6 +19,12 @@ target/
 *.iml
 *.ipr
 
+### Tipos IMG ###
+*.jpg
+*.png
+*.jpeg
+*.gif
+
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
