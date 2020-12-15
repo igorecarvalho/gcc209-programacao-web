@@ -100,7 +100,7 @@
                             >
 
                             <v-text-field
-                                v-model.lazy="usuario.cep"
+                                v-model="usuario.cep"
                                 v-on:keyup="attEndereco"
                                 mask='"#####-###"'
                                 label="CEP"
@@ -270,9 +270,7 @@
                     })
                     .catch(() => {
                     })
-
             }
-
 
         },
     }

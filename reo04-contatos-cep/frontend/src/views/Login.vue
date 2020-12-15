@@ -73,7 +73,6 @@
             login() {
 
                 console.log("oin")
-
             }
         }
 

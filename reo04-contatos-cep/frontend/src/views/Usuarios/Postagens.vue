@@ -2,74 +2,93 @@
 
    <v-container style="max-width: 600px">
 
-        <form>
-            <v-card id="nova-publicacao" flat>
-                
-                <v-col cols="12">
+        <v-container fluid>
 
-                    <v-row>
+            <form>
 
-                        <v-col
-                            cols="12"
-                            sm="12"
-                            md="12"
-                            >
+                <v-card id="nova-publicacao" flat>
 
-                            <v-text-field
-                                hide-details="auto"
-                                outlined
-                                v-model="post.titulo"
-                                label="Titulo"
-                            ></v-text-field>
-
-                        </v-col>
-
-                    </v-row>
-
-                    <v-row>
-
-                        <v-col
-                            cols="12"
-                            >
-
-                            <v-textarea
-                                hide-details="auto"
-                                outlined
-                                rows="4"
-                                row-height="15"
-                                v-model="post.mensagem"
-                                label="Digite aqui a sua publicacao"
-                            ></v-textarea>
-
-                        </v-col>
-
-                    </v-row>
-
-                </v-col>
-
-                <v-col cols="12">
-
-                    <v-row>
-
-                        <v-spacer></v-spacer>
-
-                        <v-btn
-                            class="mr-4"
-                            color="green white--text"
-                            @click="submit"
-                            >
-                            Publicar
-                        </v-btn>
+                    <v-card-title class="headline">
+                        Nova publicação
+                    </v-card-title>
                     
-                    </v-row>
-                    
-                </v-col>
+                    <v-col cols="12">
 
-            </v-card>
+                        <v-row>
 
-        </form>
+                            <v-col
+                                cols="12"
+                                sm="12"
+                                md="12"
+                                >
+
+                                <v-text-field
+                                    hide-details="auto"
+                                    outlined
+                                    v-model="post.titulo"
+                                    label="Titulo"
+                                ></v-text-field>
+
+                            </v-col>
+
+                        </v-row>
+
+                        <v-row>
+
+                            <v-col
+                                cols="12"
+                                >
+
+                                <v-textarea
+                                    hide-details="auto"
+                                    outlined
+                                    rows="4"
+                                    row-height="15"
+                                    v-model="post.mensagem"
+                                    label="Digite aqui a sua publicacao"
+                                ></v-textarea>
+
+                            </v-col>
+
+                        </v-row>
+
+                    </v-col>
+
+                    <v-col cols="12">
+
+                        <v-row>
+
+                            <v-spacer></v-spacer>
+
+                            <v-btn
+                                class="mr-4"
+                                color="green white--text"
+                                @click="submit"
+                                >
+                                Publicar
+                            </v-btn>
+                        
+                        </v-row>
+                        
+                    </v-col>
+
+                </v-card>
+
+            </form>
+
+        </v-container>
 
         <v-container fluid>
+
+                <v-toolbar>
+
+                    <v-toolbar-title>
+
+                        Publicações
+
+                    </v-toolbar-title>
+
+                </v-toolbar>
 
             <v-row dense>
 
@@ -79,10 +98,42 @@
 
                     <v-card id="publicacoes" >
 
+                        <v-row>
+
+                            <v-spacer></v-spacer>
+
+                            <v-btn
+                                class="mr-4"
+                                icon
+                                color="red white--text"
+                                @click="deletar(card.id)"
+                                >
+                                <v-icon size="20px">
+                                    mdi-delete
+                                </v-icon>
+
+                            </v-btn>
+
+                            <v-btn
+                                class="mr-4"
+                                icon
+                                color="blue white--text"
+                                @click="editar(card.id)"
+                                >
+                                <v-icon size="20px">
+                                    mdi-pencil
+                                </v-icon>
+
+                            </v-btn>
+
+                        </v-row>
+
                         <v-card class="img-card">
 
                             <v-img
-                                max-height="600px"
+                                class="imagem"
+                                max-width="auto"
+                                max-height="300px"
                                 src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
                                 >
                             </v-img>
@@ -96,13 +147,12 @@
                         <v-card-subtitle>
                             {{ card.mensagem }}
                         </v-card-subtitle>
-                        
+
                         <v-card-actions>
 
                             <v-btn
                                 color="orange lighten-2"
-                                text
-                                >
+                                text>
                                 Comentários
                             </v-btn>
 
@@ -111,37 +161,47 @@
                             <v-btn
                                 icon
                                 @click="show = !show"
-                                >
-
-                                <v-icon>
-                                    {{ show ? 'mdi-chevron-up' : 'mdi-chevron-down' }}
-                                </v-icon>
-                                
+                            >
+                                <v-icon>{{ show ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
                             </v-btn>
 
                         </v-card-actions>
 
                         <v-expand-transition>
 
-                            <div v-show="show">
+                             <v-container v-show="show">
 
-                                <v-divider></v-divider>
+                                <v-row class="linha-comentario"
+                                    v-for="comentario in card.comentarios"
+                                    :key="comentario.id">
+                                    
+                                    <v-col
+                                        class="col-comentario"
+                                        cols="12"
+                                        sm="4"
+                                        md="4"
+                                        >
+                                        <v-card-text class="nome-comentario">
+                                            {{ comentario.usuario.nome }}
+                                        </v-card-text>
 
-                                <v-col>
+                                    </v-col>
 
-                                    <v-row
-                                        v-for="comentario in card.comentarios"
-                                        :key="comentario.id">
-                                        
-                                            <v-card-text>
-                                                {{ comentario.usuario.nome }}
-                                            </v-card-text>
+                                    <v-col
+                                        class="col-comentario"
+                                        cols="12"
+                                        sm="8"
+                                        md="8">
 
-                                            <v-card-text>
-                                                {{ comentario.mensagem }}
-                                            </v-card-text>                                        
+                                        <v-card-text class="coment-comentario">
+                                            {{ comentario.mensagem }}
+                                        </v-card-text>
 
-                                    </v-row>
+                                    </v-col>
+
+                                </v-row>
+
+                                <v-col cols="12"> 
 
                                     <v-text-field
                                         hide-details="auto"
@@ -150,25 +210,25 @@
                                         label="digite o comentario..."
                                     ></v-text-field>
 
-                                    <v-row>
-
-                                        <v-spacer></v-spacer>
-
-                                        <v-btn
-                                            text
-                                            id="botao-comentar"
-                                            color="green"
-                                            size="10px"
-                                            @click="comentar(card.id)"
-                                            >
-                                            Comentar
-                                        </v-btn>
-                                    
-                                    </v-row>
-
                                 </v-col>
 
-                            </div>
+                                <v-row>
+
+                                    <v-spacer></v-spacer>
+
+                                    <v-btn
+                                        text
+                                        id="botao-comentar"
+                                        color="green"
+                                        size="10px"
+                                        @click="comentar(card.id)"
+                                        >
+                                        Comentar
+                                    </v-btn>
+                                
+                                </v-row>
+
+                             </v-container>
 
                         </v-expand-transition>
 
@@ -224,12 +284,14 @@
             console.log((window.location.pathname).split('/')[2])
             UsuarioService.getUsuario((window.location.pathname).split('/')[2])
                 .then(resposta => {
+                        console.log(resposta.data)
                         this.post.usuario = resposta.data
                         this.usuarioID = resposta.data.id
                         this.listar()
                     })
                     .catch(error => {
                         console.log(error)
+                        this.$toast.error("Erro ao carregar usuario")
                         this.listar()
                     })
         },
@@ -237,12 +299,14 @@
         methods: {
 
             submit () {
-
+                console.log(this.post)
                 PostServices.cadastrar(this.post)
                     .then(resposta => {
                         console.log(resposta.data)
                         this.$toast.success("Postagem realizado com sucesso")
                         this.listar()
+                        this.post.titulo = ''
+                        this.post.mensagem = ''
                     })
                     .catch(error => {
                         console.log(error)
@@ -264,6 +328,7 @@
                                 console.log(resposta.data)
                                 console.log("comentou")
                                 this.$toast.success("Comentario realizado com sucesso")
+                                this.novoComentario.mensagem = ''
                                 this.listar()
                             })
                             .catch(error => {
@@ -285,43 +350,50 @@
                         this.posts = resposta.data
                         
                         for (const key in this.posts) {
-                            console.log("KEY", key)
+                            //console.log("KEY", key)
                             if (Object.hasOwnProperty.call(this.posts, key)) {
-                                console.log("id", this.posts[key].id)
+                                //console.log("id", this.posts[key].id)
                                 ComentarioService.listarPorPostagem(this.posts[key].id)
                                     .then ( resposta => {
                                         this.posts[key].comentarios = resposta.data
                                     })
-                                    .catch(error => {
-                                        console.log("ERROWWW", error)
+                                    .catch(() => {
+                                        //console.log("ERROWWW", error)
                                         this.$toast.error("Erro ao carregar comentarios")
                                     })
 
 
                             }
                         }
-                        console.log(this.posts)
+                        //console.log(this.posts)
+                        this.novoComentario.mensagem = ''
                         this.$toast.success("Sucesso ao carregar postagens")
                     })
-                    .catch(error => {
-                        console.log("AAUIAUIAS", error)
+                    .catch(() => {
+                        //console.log("AAUIAUIAS", error)
                         this.$toast.error("Erro ao carregar postagens")
                     })
 
             },
 
-            carregarComentarios(idPost){
-                ComentarioService.listarPorPostagem(idPost)
+            editar (id){
+
+                console.log("editou", id)
+            },
+
+            deletar (id){
+
+                PostServices.deletar(id)
                     .then ( resposta => {
-                        this.comments = resposta.data
-                        console.log("acertou", this.comments)
-                        return this.comments
+                        console.log(resposta.data)
+                        this.$toast.success("Sucesso ao deletar postagem")
+                        this.listar()
                     })
                     .catch(error => {
-                        console.log("ERROWWW", error)
-                        this.$toast.error("Erro ao carregar comentarios")
+                        console.log(error.data)
+                        this.$toast.error("Erro ao deletar postagem")
                     })
-            }
+            },
             
         },
     }
@@ -347,7 +419,40 @@
         padding: 10px;
     }
 
-    .img-card .img {
+    .v-image__image.v-image__image--cover{
         height: 100%;
     }
+
+    .v-card__text.username {
+        font-weight: bolder;
+        font-size: 15px
+    }
+
+    .linha-comentario {
+        margin: 0px !important;
+        padding: 0px !important;
+        border-top: 0.1px solid !important;
+    }
+
+    .col-comentario {
+        margin: 0px !important;
+        padding: 0px !important;
+    }
+    .v-card__text {
+        margin: 5px !important;
+        padding: 5px !important;
+    }
+    .nome-comentario {
+        padding-right: 10px !important;
+        text-align: end !important;
+        text-transform: capitalize !important;
+        font-weight: bolder !important;
+        font-size: 20px !important;
+    }
+
+    .coment-comentario {
+        text-align: start !important;
+        font-size: 15px !important;
+    }
+
 </style>
