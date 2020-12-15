@@ -3,10 +3,13 @@ package com.pw.blog.controller;
 import com.pw.blog.model.Comentarios;
 import com.pw.blog.model.Usuario;
 import com.pw.blog.repository.UsuarioRepository;
+import com.pw.blog.security.MyUserDetailsService;
 import com.pw.blog.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,6 +20,15 @@ public class UsuarioController {
 
     @Autowired
     UsuarioService usuarioService;
+
+    @Autowired
+    MyUserDetailsService myUserDetailsService;
+
+    @CrossOrigin
+    @GetMapping("/verificar")
+    public UserDetails verificarAutorizacao(Usuario login){
+        return myUserDetailsService.loadUserByUsername(login.getLogin());
+    }
 
     @CrossOrigin
     @GetMapping("/listarTodos")

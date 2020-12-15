@@ -55,8 +55,11 @@
                         <v-col cols="12">
 
                             <v-file-input
+                                outlined
                                 show-size
-                                label="File input"
+                                accept="image/png, image/jpeg, image/bmp"
+                                prepend-icon="mdi-camera"
+                                label="Selecione a imagem"
                                 @change="selectFile">
                             </v-file-input>
                             
@@ -233,7 +236,7 @@
                             <v-img
                                 class="imagem"
                                 max-width="auto"
-                                max-height="300px"
+
                                 :src="card.fileName"
                                 >
                             </v-img>
@@ -357,8 +360,11 @@
         data: () => ({
 
             currentFile: undefined,
+
             progress: 0,
+
             message: "",
+
             fileInfos: [],
 
             dialog: [],
@@ -473,6 +479,7 @@
                         this.listar()
                         this.post.titulo = ''
                         this.post.mensagem = ''
+                        this.currentFile = undefined
                     })
                     .catch(error => {
                         console.log(error)

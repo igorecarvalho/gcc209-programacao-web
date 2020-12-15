@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Getter
@@ -25,6 +26,4 @@ public class Post implements Serializable {
     @ManyToOne
     private Usuario usuario;
 
-    public Post() {
-    }
 }

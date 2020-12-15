@@ -16,14 +16,12 @@
                 </v-card-title>
 
                 <v-text-field
-                    v-model="usuario.login"
-                    :value="usuario.login"
+                    v-model="username"
                     label="Login"
                 ></v-text-field>
 
                 <v-text-field
-                    v-model="usuario.senha"
-                    :value="usuario.senha"
+                    v-model="password"
                     label="Senha"
                 ></v-text-field>
 
@@ -53,6 +51,8 @@
 
 <script>
 
+    import UsuariosService from '../services/usuarioService';
+
     export default {
 
         data: () => ({
@@ -64,7 +64,7 @@
                 login: null,
 
                 senha: null,
-            }
+            },
 
         }),
 
@@ -73,7 +73,20 @@
             login() {
 
                 console.log("oin")
-            }
+
+                UsuariosService.listar()
+                    .then(resposta => {
+                        console.log(resposta.data)
+                        this.$toast.success('Usuario salvo com sucesso!')
+                        resposta.data.forEach(element => {
+                            console.log(element)
+                        });
+                    })
+                    .catch(error => {
+                        console.log(error)
+                        this.$toast.error("Erro ao cadastrar usuario")
+                    })
+            },
         }
 
     }
@@ -88,5 +101,22 @@
         align-content: center;
         justify-content: space-around;
     }
+
+.loader {
+  border: 5px solid #f3f3f3; /* Light grey */
+  border-top: 5px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  animation: spin 2s linear infinite;
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 
 </style>
