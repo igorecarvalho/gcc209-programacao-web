@@ -9,8 +9,8 @@ import VueToast from 'vue-toast-notification';
 Vue.config.productionTip = false
 
 Vue.use(VueToast, {
-    duration: 6000,
-    position: 'top-right',
+    duration: 2000,
+    position: 'bottom-right',
 })
 
 new Vue({

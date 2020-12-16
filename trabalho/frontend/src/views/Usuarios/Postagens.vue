@@ -1,318 +1,72 @@
 <template>
 
-   <v-container style="max-width: 600px">
+    <v-div id="container" >
 
-        <v-container fluid>
+        <Header :user="post.usuario.nome" :login="post.usuario.login" :pagina="value" show="true" :usuario="post.usuario.id"/>
 
-            <form>
+        <v-container style="max-width: 600px">
 
-                <v-card id="nova-publicacao" flat>
+                <v-container fluid>
 
-                    <v-card-title class="headline">
-                        Nova publicação
-                    </v-card-title>
-                    
-                    <v-col cols="12">
+                    <form>
 
-                        <v-row>
+                        <v-card id="nova-publicacao" flat>
 
-                            <v-col
-                                cols="12"
-                                sm="12"
-                                md="12"
-                                >
-
-                                <v-text-field
-                                    hide-details="auto"
-                                    outlined
-                                    v-model="post.titulo"
-                                    label="Titulo"
-                                ></v-text-field>
-
-                            </v-col>
-
-                        </v-row>
-
-                        <v-row>
-
-                            <v-col
-                                cols="12"
-                                >
-
-                                <v-textarea
-                                    hide-details="auto"
-                                    outlined
-                                    rows="3"
-                                    row-height="15"
-                                    v-model="post.mensagem"
-                                    label="Digite aqui a sua publicacao"
-                                ></v-textarea>
-
-                            </v-col>
-
-                        </v-row>
-
-                        <v-col cols="12">
-
-                            <v-file-input
-                                outlined
-                                show-size
-                                accept="image/png, image/jpeg, image/bmp"
-                                prepend-icon="mdi-camera"
-                                label="Selecione a imagem"
-                                @change="selectFile">
-                            </v-file-input>
+                            <v-card-title class="headline">
+                                Nova publicação
+                            </v-card-title>
                             
-                        </v-col>
+                            <v-col cols="12">
 
-                        <v-row>
+                                <v-row>
 
-                            <v-spacer></v-spacer>
-
-                            <v-btn
-                                class="mr-4"
-                                color="green white--text"
-                                @click="submit"
-                                >
-                                Publicar
-                            </v-btn>
-                        
-                        </v-row>
-                        
-                    </v-col>
-
-                </v-card>
-
-            </form>
-
-        </v-container>
-
-        <v-container fluid>
-
-                <v-toolbar>
-
-                    <v-toolbar-title>
-
-                        Publicações
-
-                    </v-toolbar-title>
-
-                </v-toolbar>
-
-            <v-row dense>
-
-                <v-col cols="12"
-                    v-for="card in posts"
-                    :key="card.id">
-
-                    <v-card id="publicacoes" >
-
-                        <v-row>
-
-                            <v-spacer></v-spacer>
-
-                            <v-btn
-                                class="mr-4"
-                                icon
-                                color="red white--text"
-                                @click="deletar(card.id)"
-                                >
-                                <v-icon size="20px">
-                                    mdi-delete
-                                </v-icon>
-
-                            </v-btn>
-
-                            <v-dialog
-                                v-model="dialog[card.id]"
-                                persistent
-                                max-width="500px">
-
-                                <template v-slot:activator="{ on, attrs }">
-
-                                    <v-btn
-                                        class="mr-4"
-                                        icon
-                                        color="green white--text"
-                                        v-bind="attrs"
-                                        v-on="on"
-                                        @click="carregarEdicao(card)">
-
-                                        <v-icon size="20px">
-                                            mdi-pencil
-                                        </v-icon>
-
-                                    </v-btn>
-
-                                </template>
-
-                                <v-card>
-
-                                    <v-card-title>
-
-                                        <span class="headline">
-                                           Edição do post {{card.id}}
-                                        </span>
-
-                                    </v-card-title>
-
-                                    <v-card-text>
-                                        
-                                        <v-col cols="12">
-
-                                            <v-row>
-
-                                                <v-col
-                                                    cols="12"
-                                                    sm="12"
-                                                    md="12"
-                                                    >
-
-                                                    <v-text-field
-                                                        hide-details="auto"
-                                                        outlined
-                                                        v-model="editado.titulo"
-                                                        label="Titulo"
-                                                    ></v-text-field>
-
-                                                </v-col>
-
-                                            </v-row>
-
-                                            <v-row>
-
-                                                <v-col
-                                                    cols="12"
-                                                    >
-
-                                                    <v-textarea
-                                                        hide-details="auto"
-                                                        outlined
-                                                        rows="3"
-                                                        row-height="15"
-                                                        v-model="editado.mensagem"
-                                                        label="Digite aqui a sua publicacao"
-                                                    ></v-textarea>
-
-                                                </v-col>
-
-                                            </v-row>
-
-                                        </v-col>
-
-                                    </v-card-text>
-                                    
-                                    <v-card-actions>
-
-                                        <v-spacer></v-spacer>
-
-                                        <v-btn
-                                            color="red darken-1"
-                                            text
-                                            @click="cancelarDialog(card.id)">
-                                            Close
-                                        </v-btn>
-
-
-
-                                        <v-btn
-                                            class="mr-4"
-                                            color="green white--text"
-                                            @click="editar(card)">
-                                            Salvar
-                                        </v-btn>
-                                            
-
-                                    </v-card-actions>
-
-                                </v-card>
-                                
-                            </v-dialog>
-
-                        </v-row>
-
-                        <v-card class="img-card">
-
-                            <v-img
-                                class="imagem"
-                                max-width="auto"
-
-                                :src="card.fileName"
-                                >
-                            </v-img>
-
-                        </v-card>
-
-                        <v-card-title>
-                           {{ card.titulo }}
-                        </v-card-title>
-
-                        <v-card-subtitle>
-                            {{ card.mensagem }}
-                        </v-card-subtitle>
-
-                        <v-card-actions>
-
-                            <v-btn
-                                color="orange lighten-2"
-                                text>
-                                Comentários
-                            </v-btn>
-
-                            <v-spacer></v-spacer>
-
-                            <v-btn
-                                icon
-                                @click="show = !show">
-
-                                <v-icon>{{ show ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
-                            </v-btn>
-
-                        </v-card-actions>
-
-                        <v-expand-transition>
-
-                             <v-container v-show="show">
-
-                                <v-row class="linha-comentario"
-                                    v-for="comentario in card.comentarios"
-                                    :key="comentario.id">
-                                    
                                     <v-col
-                                        class="col-comentario"
                                         cols="12"
-                                        sm="4"
-                                        md="4"
+                                        sm="12"
+                                        md="12"
                                         >
-                                        <v-card-text class="nome-comentario">
-                                            {{ comentario.usuario.nome }}
-                                        </v-card-text>
 
-                                    </v-col>
-
-                                    <v-col
-                                        class="col-comentario"
-                                        cols="12"
-                                        sm="8"
-                                        md="8">
-
-                                        <v-card-text class="coment-comentario">
-                                            {{ comentario.mensagem }}
-                                        </v-card-text>
+                                        <v-text-field
+                                            hide-details="auto"
+                                            outlined
+                                            v-model="post.titulo"
+                                            label="Titulo"
+                                        ></v-text-field>
 
                                     </v-col>
 
                                 </v-row>
 
-                                <v-col cols="12"> 
+                                <v-row>
 
-                                    <v-text-field
-                                        hide-details="auto"
+                                    <v-col
+                                        cols="12"
+                                        >
+
+                                        <v-textarea
+                                            hide-details="auto"
+                                            outlined
+                                            rows="3"
+                                            row-height="15"
+                                            v-model="post.mensagem"
+                                            label="Digite aqui a sua publicacao"
+                                        ></v-textarea>
+
+                                    </v-col>
+
+                                </v-row>
+
+                                <v-col cols="12">
+
+                                    <v-file-input
                                         outlined
-                                        v-model="comentario"
-                                        label="digite o comentario..."
-                                    ></v-text-field>
-
+                                        show-size
+                                        accept="image/png, image/jpeg, image/bmp"
+                                        prepend-icon="mdi-camera"
+                                        label="Selecione a imagem"
+                                        @change="selectFile">
+                                    </v-file-input>
+                                    
                                 </v-col>
 
                                 <v-row>
@@ -320,31 +74,307 @@
                                     <v-spacer></v-spacer>
 
                                     <v-btn
-                                        text
-                                        id="botao-comentar"
-                                        color="green"
-                                        size="10px"
-                                        @click="comentar(card.id)"
+                                        class="mr-4"
+                                        color="green white--text"
+                                        @click="submit"
                                         >
-                                        Comentar
+                                        Publicar
                                     </v-btn>
                                 
                                 </v-row>
+                                
+                            </v-col>
 
-                             </v-container>
+                        </v-card>
 
-                        </v-expand-transition>
+                    </form>
 
-                    </v-card>
+                </v-container>
 
-                </v-col>
+                <v-container fluid>
 
-            </v-row>
+                        <v-toolbar>
+
+                            <v-toolbar-title>
+
+                                Publicações
+
+                            </v-toolbar-title>
+
+                        </v-toolbar>
+
+                    <v-row dense>
+
+                        <v-col cols="12"
+                            v-for="card in posts"
+                            :key="card.id">
+
+                            <v-card id="publicacoes" >
+
+                                <v-row>
+
+                                    <v-spacer></v-spacer>
+
+                                    <v-btn
+                                        class="mr-4"
+                                        icon
+                                        color="red white--text"
+                                        @click="deletar(card.id)"
+                                        >
+                                        <v-icon size="20px">
+                                            mdi-delete
+                                        </v-icon>
+
+                                    </v-btn>
+
+                                    <v-dialog
+                                        v-model="dialog[card.id]"
+                                        persistent
+                                        max-width="500px">
+
+                                        <template v-slot:activator="{ on, attrs }">
+
+                                            <v-btn
+                                                class="mr-4"
+                                                icon
+                                                color="green white--text"
+                                                v-bind="attrs"
+                                                v-on="on"
+                                                @click="carregarEdicao(card)">
+
+                                                <v-icon size="20px">
+                                                    mdi-pencil
+                                                </v-icon>
+
+                                            </v-btn>
+
+                                        </template>
+
+                                        <v-card>
+
+                                            <v-card-title>
+
+                                                <span class="headline">
+                                                Edição do post {{card.id}}
+                                                </span>
+
+                                            </v-card-title>
+
+                                            <v-card-text>
+                                                
+                                                <v-col cols="12">
+
+                                                    <v-row>
+
+                                                        <v-col
+                                                            cols="12"
+                                                            sm="12"
+                                                            md="12"
+                                                            >
+
+                                                            <v-text-field
+                                                                hide-details="auto"
+                                                                outlined
+                                                                v-model="editado.titulo"
+                                                                label="Titulo"
+                                                            ></v-text-field>
+
+                                                        </v-col>
+
+                                                    </v-row>
+
+                                                    <v-row>
+
+                                                        <v-col
+                                                            cols="12"
+                                                            >
+
+                                                            <v-textarea
+                                                                hide-details="auto"
+                                                                outlined
+                                                                rows="3"
+                                                                row-height="15"
+                                                                v-model="editado.mensagem"
+                                                                label="Digite aqui a sua publicacao"
+                                                            ></v-textarea>
+
+                                                        </v-col>
+
+                                                    </v-row>
+
+                                                </v-col>
+
+                                            </v-card-text>
+                                            
+                                            <v-card-actions>
+
+                                                <v-spacer></v-spacer>
+
+                                                <v-btn
+                                                    color="red darken-1"
+                                                    text
+                                                    @click="cancelarDialog(card.id)">
+                                                    Close
+                                                </v-btn>
+
+
+
+                                                <v-btn
+                                                    class="mr-4"
+                                                    color="green white--text"
+                                                    @click="editar(card)">
+                                                    Salvar
+                                                </v-btn>
+                                                    
+
+                                            </v-card-actions>
+
+                                        </v-card>
+                                        
+                                    </v-dialog>
+
+                                </v-row>
+
+                                <v-card class="img-card">
+
+                                    <v-img
+                                        class="imagem"
+                                        max-width="auto"
+
+                                        :src="card.fileName"
+                                        >
+                                    </v-img>
+
+                                </v-card>
+
+                                <v-card-title>
+                                {{ card.titulo }}
+                                </v-card-title>
+
+                                <v-card-subtitle>
+                                    {{ card.mensagem }}
+                                </v-card-subtitle>
+
+                                <v-card-actions>
+
+                                    <v-btn
+                                        color="orange lighten-2"
+                                        text>
+                                        Comentários
+                                    </v-btn>
+
+                                    <v-spacer></v-spacer>
+
+                                    <v-btn
+                                        icon
+                                        @click="show = !show">
+
+                                        <v-icon>{{ show ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
+                                    </v-btn>
+
+                                </v-card-actions>
+
+                                <v-expand-transition>
+
+                                    <v-container v-show="show">
+
+                                        <v-row class="linha-comentario"
+                                            v-for="comentario in card.comentarios"
+                                            :key="comentario.id">
+                                            
+                                            <v-col
+                                                class="col-comentario"
+                                                cols="12"
+                                                sm="3"
+                                                md="3"
+                                                >
+                                                <v-card-text class="nome-comentario">
+                                                    {{ comentario.usuario.nome }}
+                                                </v-card-text>
+
+                                            </v-col>
+
+                                            <v-col
+                                                class="col-comentario"
+                                                cols="12"
+                                                sm="8"
+                                                md="8">
+
+                                                <v-card-text class="coment-comentario">
+                                                    {{ comentario.mensagem }}
+                                                </v-card-text>
+
+                                            </v-col>
+
+                                             <v-spacer></v-spacer>
+
+                                            <v-col
+                                                class="col-comentario"
+                                                cols="12"
+                                                sm="1"
+                                                md="1">
+
+                                                <v-btn
+                                                    class="mr-4"
+                                                    icon
+                                                    color="red white--text"
+                                                    @click="deletarComentario(comentario.id)"
+                                                    >
+                                                    <v-icon size="15px">
+                                                        mdi-delete
+                                                    </v-icon>
+
+                                                </v-btn>
+
+                                            </v-col>
+
+                                        </v-row>
+
+                                        <v-col cols="12"> 
+
+                                            <v-text-field
+                                                hide-details="auto"
+                                                outlined
+                                                v-model="comentario"
+                                                label="digite o comentario..."
+                                            ></v-text-field>
+
+                                        </v-col>
+
+                                        <v-row>
+
+                                            <v-spacer></v-spacer>
+
+                                            <v-btn
+                                                text
+                                                id="botao-comentar"
+                                                color="green"
+                                                size="10px"
+                                                @click="comentar(card.id)"
+                                                >
+                                                Comentar
+                                            </v-btn>
+                                        
+                                        </v-row>
+
+                                    </v-container>
+
+                                </v-expand-transition>
+
+                            </v-card>
+
+                        </v-col>
+
+                    </v-row>
+
+                </v-container>
+
 
         </v-container>
 
+        <Footer />
 
-   </v-container>
+    </v-div>
 
 </template>
 
@@ -355,9 +385,13 @@
     import UsuarioService from "../../services/usuarioService";
     import ComentarioService from "../../services/comentarioService";
     import UploadService from "../../services/UploadFilesService";
+    import Header from "../../components/Header";
+    import Footer from "../../components/Footer";
 
     export default {
         data: () => ({
+
+            value: 1,
 
             currentFile: undefined,
 
@@ -590,12 +624,29 @@
                     })
             },
 
+            deletarComentario(id){
+                
+                ComentarioService.deletar(id)
+                    .then ( () => {
+                        this.$toast.success("Sucesso ao deletar comentario")
+                        this.listar()
+                    })
+                    .catch(error => {
+                        console.log(error.data)
+                        this.$toast.error("Erro ao deletar comentario")
+                    })
+            },
+
             cancelarDialog() {
 
                 this.dialog = []
 
             }
             
+        },
+        components: {
+            Header,
+            Footer,
         },
     }
 </script>
@@ -658,6 +709,20 @@
 
     .v-card.v-sheet.theme--light{
         overflow-x: hidden !important;
+    }
+
+    #container{
+        padding: 0px;
+        margin: 0px; 
+    }
+
+    .v-card__title{
+        font-size: 30px !important;
+        font-weight: bolder !important;
+    }
+
+    .v-card__subtitle{
+        text-align: center;
     }
 
 </style>

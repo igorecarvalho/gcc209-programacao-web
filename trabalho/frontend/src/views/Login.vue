@@ -1,50 +1,56 @@
 <template>
 
-    <v-container id="login-box">
+    <v-div id="container" >
 
-        <form>    
+        <Header user="Não logado" login="Favor realizar login"/>
 
-            <v-card
-                min-width="300px"
-                style="padding: 10px; margin: 10px"
-                color="teal"
-                dark
-                >
+        <v-container id="login-box">
 
-                <v-card-title class="headline">
-                    Login de usuário
-                </v-card-title>
+            <form>    
 
-                <v-text-field
-                    v-model="username"
-                    label="Login"
-                ></v-text-field>
+                <v-card
+                    min-width="300px"
+                    style="padding: 10px; margin: 10px"
+                    color="teal"
+                    dark
+                    >
 
-                <v-text-field
-                    v-model="password"
-                    label="Senha"
-                ></v-text-field>
+                    <v-card-title class="headline">
+                        Login de usuário
+                    </v-card-title>
 
-                <v-card-actions>
+                    <v-text-field
+                        v-model="usuario.login"
+                        label="Login"
+                    ></v-text-field>
 
-                    <v-btn 
-                            router :to="cadastrar">
-                            Novo usuario
-                    </v-btn>
+                    <v-text-field
+                        v-model="usuario.senha"
+                        label="Senha"
+                    ></v-text-field>
 
-                    <v-spacer></v-spacer>
+                    <v-card-actions>
 
-                    <v-btn @click="login()">
-                            Entrar
-                    </v-btn>
+                        <v-btn 
+                                router :to="cadastrar">
+                                Novo usuario
+                        </v-btn>
 
-                </v-card-actions>
+                        <v-spacer></v-spacer>
 
-            </v-card>
+                        <v-btn @click="login()">
+                                Entrar
+                        </v-btn>
 
-        </form>
+                    </v-card-actions>
 
-    </v-container>
+                </v-card>
+
+            </form>
+
+        </v-container>
+
+    </v-div>
 
 </template>
 
@@ -52,10 +58,13 @@
 <script>
 
     import UsuariosService from '../services/usuarioService';
+    import Header from "../components/Header";
 
     export default {
 
         data: () => ({
+
+            autenticacao: null,
 
             cadastrar: 'cadastrar-usuario',
 
@@ -72,22 +81,27 @@
 
             login() {
 
-                console.log("oin")
-
                 UsuariosService.listar()
                     .then(resposta => {
-                        console.log(resposta.data)
-                        this.$toast.success('Usuario salvo com sucesso!')
+                        //console.log(resposta.data)
                         resposta.data.forEach(element => {
                             console.log(element)
+                            if (this.usuario.login == element.login && this.usuario.senha == element.senha) {
+                                this.autenticacao = element.id
+                                console.log("check", this.autenticacao)
+                                window.location.replace("/home/" + this.autenticacao);
+                            }
                         });
                     })
-                    .catch(error => {
-                        console.log(error)
-                        this.$toast.error("Erro ao cadastrar usuario")
-                    })
+                    if (this.autenticacao == null) {
+                        this.$toast.error("Usuario nao cadastrado")
+                    }
             },
-        }
+        },
+
+        components: {
+            Header,
+        },
 
     }
 
@@ -102,21 +116,21 @@
         justify-content: space-around;
     }
 
-.loader {
-  border: 5px solid #f3f3f3; /* Light grey */
-  border-top: 5px solid #3498db; /* Blue */
-  border-radius: 50%;
-  width: 25px;
-  height: 25px;
-  animation: spin 2s linear infinite;
-}
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
+    .loader {
+    border: 5px solid #f3f3f3; /* Light grey */
+    border-top: 5px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    animation: spin 2s linear infinite;
+    }
+    @keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+    }
 
 </style>

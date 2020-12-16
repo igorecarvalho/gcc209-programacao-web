@@ -2,18 +2,10 @@
 
     <div>
 
-        <v-app>
-        
-            <v-main cols="12"
-                    align="center"
-                    justify="center"
-                    class="grey lighten-2">
-                    
-                <Header></Header>
-                <router-view></router-view>
-                <Footer></Footer>
+        <v-app id="app">
 
-            </v-main>
+            <router-view></router-view>
+            <Footer></Footer>
 
         </v-app>
 
@@ -23,8 +15,8 @@
 
 <script>
 
-    import Header from "@/components/Header.vue";
-    import Footer from "@/components/Footer.vue";
+    //import Header from "@/components/Header.vue";
+    //import Footer from "@/components/Footer.vue";
     import 'vue-toast-notification/dist/theme-sugar.css';
 
     export default {
@@ -32,13 +24,17 @@
         name: "App",
 
         components: {
-            Header,
-            Footer,
+            //Header,
+            //Footer,
         },
     };
 
 </script>
 
 <style>
+
+#app{
+    background-color: grey;
+}
 
 </style>

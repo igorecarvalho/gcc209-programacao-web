@@ -69,7 +69,8 @@ public class Usuario implements Serializable {
     public void setSenha(String senha) {
 
         PasswordEncoder encoder = new BCryptPasswordEncoder();
-        this.senha = encoder.encode(senha);
+//        this.senha = encoder.encode(senha);
+        this.senha = senha;
     }
 
     public void setGrupo(Grupo grupo) {

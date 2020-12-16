@@ -19,9 +19,19 @@ const routes = [
         component: Home
     },
     {
+        path: '/home/',
+        name: 'Pagina Inicial',
+        component: Login
+    },
+    {
         path: '/minhas-postagens/:id',
         name: 'Minhas Postagens',
         component: Postagens
+    },
+    {
+        path: '/minhas-postagens/',
+        name: 'Minhas Postagens',
+        component: Login
     },
     {
         path: '/cadastrar-usuario',
