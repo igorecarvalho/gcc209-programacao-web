@@ -62,7 +62,7 @@
                 <template v-slot:activator="{ on }">
 
                     <v-btn
-                        :v-if="mostar"
+                        v-if="mostar"
                         icon
                         x-large
                         v-on="on"

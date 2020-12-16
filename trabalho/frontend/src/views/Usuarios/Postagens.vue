@@ -297,7 +297,7 @@
                                                 md="2"
                                                 >
                                                 <v-card-text class="nome-comentario">
-                                                    {{ comentario.usuario.nome }}
+                                                    {{ comentario.usuario.nome }} :
                                                 </v-card-text>
 
                                             </v-col>
