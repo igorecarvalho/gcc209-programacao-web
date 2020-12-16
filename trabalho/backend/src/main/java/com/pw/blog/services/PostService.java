@@ -1,5 +1,6 @@
 package com.pw.blog.services;
 
+import com.pw.blog.model.Comentarios;
 import com.pw.blog.model.Post;
 import com.pw.blog.model.Usuario;
 import com.pw.blog.repository.PostRepository;
@@ -10,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -23,6 +23,9 @@ public class PostService {
     @Autowired
     UsuarioRepository usuarioRepository;
 
+    @Autowired
+    ComentariosService comentariosService;
+
     public List<Post> listarTodos(){
 
         return postRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
@@ -30,8 +33,8 @@ public class PostService {
 
     public List<Post> listarPorUsuario(Long idUsuario){
 
-        Usuario usuario = usuarioRepository.findFirstById(idUsuario);
-        return postRepository.findAllByUsuario(usuario);
+        Usuario usuario = usuarioRepository.findFirstById(Sort.by(Sort.Direction.DESC, "id"), idUsuario);
+        return postRepository.findAllByUsuario(Sort.by(Sort.Direction.DESC, "id"), usuario);
     }
 
     public Post cadastrar(Post post){
@@ -57,6 +60,9 @@ public class PostService {
 
         Post post = postRepository.findFirstById(id);
 
+        for (Comentarios comentario: comentariosService.listarPorPost(id)) {
+            comentariosService.deletar(comentario.getId());
+        }
         postRepository.delete(post);
     }
 }

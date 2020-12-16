@@ -26,6 +26,10 @@ public class Comentarios implements Serializable {
         this.dataCriacao = dataCriacao;
     }
 
+    public long getId() {
+        return id;
+    }
+
     @ManyToOne
     private Usuario usuario;
 

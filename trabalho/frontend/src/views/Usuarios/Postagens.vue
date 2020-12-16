@@ -268,7 +268,7 @@
                                     <v-btn
                                         color="orange lighten-2"
                                         text>
-                                        Comentários
+                                        Comentários ({{card.comentarios == undefined ? 0 : card.comentarios.length }})
                                     </v-btn>
 
                                     <v-spacer></v-spacer>
@@ -456,16 +456,17 @@
         }),
 
         mounted(){
+            this.show = true
             //console.log((window.location.pathname).split('/')[2])
             UsuarioService.getUsuario((window.location.pathname).split('/')[2])
                 .then(resposta => {
-                        console.log(resposta.data)
+                        //console.log(resposta.data)
                         this.post.usuario = resposta.data
                         this.usuarioID = resposta.data.id
                         this.listar()
                     })
-                    .catch(error => {
-                        console.log(error)
+                    .catch(() => {
+                        //console.log(error)
                         this.$toast.error("Erro ao carregar usuario")
                         this.listar()
                     })
@@ -474,7 +475,7 @@
         methods: {
 
             selectFile(file) {
-                console.log("veio")
+                //console.log("veio")
                 this.progress = 0;
                 this.currentFile = file;
             },
@@ -507,10 +508,10 @@
 
             submit () {
                 this.post.fileName = "http://localhost:7979/files/" + this.currentFile.name
-                console.log(this.post)
+                //console.log(this.post)
                 PostServices.cadastrar(this.post)
-                    .then(resposta => {
-                        console.log(resposta.data)
+                    .then(() => {
+                        //console.log(resposta.data)
 
                         this.message = "";
                         
@@ -518,7 +519,7 @@
                             this.progress = Math.round((100 * event.loaded) / event.total);
                         })
                         .then((response) => {
-                            console.log(response.data)
+                            //console.log(response.data)
                             this.message = response.data.message;
                             return UploadService.getFiles();
                         })
@@ -528,17 +529,17 @@
                         .catch(() => {
                             this.progress = 0;
                             this.message = "Could not upload the file!";
-                            this.currentFile = undefined;
+                            this.currentFile = '';
                         });
 
                         this.$toast.success("Postagem realizado com sucesso")
                         this.listar()
                         this.post.titulo = ''
                         this.post.mensagem = ''
-                        this.currentFile = undefined
+                        this.currentFile = ''
                     })
-                    .catch(error => {
-                        console.log(error)
+                    .catch(() => {
+                        //console.log(error)
                         this.$toast.error("Erro ao realizar postagens")
                         this.listar()
                     })
@@ -553,27 +554,26 @@
                         this.novoComentario.mensagem = this.comentario
 
                         ComentarioService.cadastrar(this.novoComentario)
-                            .then(resposta => {
-                                console.log(resposta.data)
-                                console.log("comentou")
+                            .then(() => {
+                                //console.log(resposta.data)
+                                //console.log("comentou")
                                 this.$toast.success("Comentario realizado com sucesso")
+                                this.comentario = ''
                                 this.novoComentario.mensagem = ''
                                 this.listar()
                             })
-                            .catch(error => {
-                                console.log(error)
+                            .catch(() => {
+                                //console.log(error)
                                 this.$toast.error("Erro ao realizar comentario")
                             })
                     })
-                    .catch(error => {
-                        console.log(error)
+                    .catch(() => {
+                        //console.log(error)
                         this.$toast.error("Erro ao carregar post para comentar")
                     })
             },
             
             listar(){
-                
-                this.show = false
                 PostServices.listarPorUser(this.usuarioID)
                     .then( resposta => {
                         this.posts = resposta.data
@@ -594,6 +594,7 @@
 
                             }
                         }
+                        this.show = false
                         //console.log(this.posts)
                         this.novoComentario.mensagem = ''
                         this.$toast.success("Sucesso ao carregar postagens")
@@ -608,11 +609,11 @@
             editar(post) {
                 post.titulo = this.editado.titulo
                 post.mensagem = this.editado.mensagem
-                console.log("editado post: ", post)
+                //console.log("editado post: ", post)
                 
                 PostServices.editar(post, post.id)
-                    .then ( resposta => {
-                        console.log(resposta.data)
+                    .then ( () => {
+                        //console.log(resposta.data)
                         this.$toast.success("Postagem editada com sucesso")
                         this.dialog = []
                         this.listar()
@@ -628,20 +629,20 @@
             carregarEdicao(post) {
                 this.editado.titulo = post.titulo
                 this.editado.mensagem = post.mensagem
-                console.log(this.editado.titulo)
-                console.log(this.editado.mensagem)
+                // console.log(this.editado.titulo)
+                // console.log(this.editado.mensagem)
             },
 
             deletar(id){
 
                 PostServices.deletar(id)
-                    .then ( resposta => {
-                        console.log(resposta.data)
+                    .then ( () => {
+                        //console.log(resposta.data)
                         this.$toast.success("Sucesso ao deletar postagem")
                         this.listar()
                     })
-                    .catch(error => {
-                        console.log(error.data)
+                    .catch(() => {
+                        //console.log(error.data)
                         this.$toast.error("Erro ao deletar postagem")
                     })
             },
@@ -653,8 +654,8 @@
                         this.$toast.success("Sucesso ao deletar comentario")
                         this.listar()
                     })
-                    .catch(error => {
-                        console.log(error.data)
+                    .catch(() => {
+                        //console.log(error.data)
                         this.$toast.error("Erro ao deletar comentario")
                     })
             },

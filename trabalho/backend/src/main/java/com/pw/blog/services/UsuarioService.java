@@ -7,6 +7,7 @@ import com.pw.blog.repository.GrupoRepository;
 import com.pw.blog.repository.PermissaoRepository;
 import com.pw.blog.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
@@ -46,7 +47,7 @@ public class UsuarioService {
 
     public Usuario getUsuario(Long id){
 
-        return usuarioRepository.findFirstById(id);
+        return usuarioRepository.findFirstById(Sort.by(Sort.Direction.DESC, "id"), id);
     }
 
     public Usuario editar(Usuario usuario){
