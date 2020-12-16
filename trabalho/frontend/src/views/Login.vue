@@ -26,6 +26,8 @@
                     ></v-text-field>
 
                     <v-text-field
+                        type="password"
+                        counter
                         v-model="usuario.senha"
                         label="Senha"
                     ></v-text-field>

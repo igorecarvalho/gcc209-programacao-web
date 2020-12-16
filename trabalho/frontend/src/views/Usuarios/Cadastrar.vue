@@ -73,6 +73,7 @@
                             >
 
                             <v-text-field
+                                type="password"
                                 v-model="usuario.senha"
                                 label="Senha"
                             ></v-text-field>
