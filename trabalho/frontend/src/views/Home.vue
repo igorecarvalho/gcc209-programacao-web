@@ -2,7 +2,7 @@
 
     <v-div id="container" >
 
-        <Header :user="post.usuario.nome" :login="post.usuario.login" :pagina="value" show="true"/>
+        <Header :user="post.usuario.nome" :login="post.usuario.login" :pagina="value" :show="mostra" :usuario="post.usuario.id"/>
 
         <v-container style="max-width: 600px">
 
@@ -111,11 +111,15 @@
 
                             <v-card id="publicacoes" >
 
-                                <v-row>
+                                <v-row id="superiorCard">
+
+                                    <v-card-title id="usuario-card">
+                                        {{card.usuario.nome}}
+                                    </v-card-title>
 
                                     <v-spacer></v-spacer>
 
-                                    <v-btn
+                                    <!-- <v-btn
                                         class="mr-4"
                                         icon
                                         color="red white--text"
@@ -231,7 +235,7 @@
 
                                         </v-card>
                                         
-                                    </v-dialog>
+                                    </v-dialog> -->
 
                                 </v-row>
 
@@ -314,7 +318,7 @@
                                                 sm="1"
                                                 md="1">
 
-                                                <v-btn
+                                                <!-- <v-btn
                                                     class="mr-4"
                                                     icon
                                                     color="red white--text"
@@ -324,7 +328,7 @@
                                                         mdi-delete
                                                     </v-icon>
 
-                                                </v-btn>
+                                                </v-btn> -->
 
                                             </v-col>
 
@@ -391,7 +395,9 @@
     export default {
         data: () => ({
 
-            value: 2,
+            mostra: true,
+
+            value: 0,
 
             currentFile: undefined,
 
@@ -437,7 +443,7 @@
             //console.log((window.location.pathname).split('/')[2])
             UsuarioService.getUsuario((window.location.pathname).split('/')[2])
                 .then(resposta => {
-                        console.log(resposta.data)
+                        //console.log(resposta.data)
                         this.post.usuario = resposta.data
                         this.usuarioID = resposta.data.id
                         this.listar()
@@ -723,6 +729,20 @@
 
     .v-card__subtitle{
         text-align: center;
+    }
+
+    #superiorCard{
+        display: flex;
+        align-items: center;
+        margin: 0px;
+        max-height: 50px;
+
+    }
+
+    #usuario-card{
+        text-transform: capitalize;
+        padding-left: 50px ;
+        font-size: 20px !important;
     }
 
 </style>

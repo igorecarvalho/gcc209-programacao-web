@@ -2,13 +2,14 @@
 
     <v-div id="container" >
 
-        <Header user="Não logado" login="Favor realizar login"/>
+        <Header user="Não logado" login="Favor realizar login" :show="mostra"/>
 
         <v-container id="login-box">
 
             <form>    
 
                 <v-card
+                    id="login"
                     min-width="300px"
                     style="padding: 10px; margin: 10px"
                     color="teal"
@@ -50,6 +51,8 @@
 
         </v-container>
 
+        <Footer/>
+
     </v-div>
 
 </template>
@@ -59,10 +62,13 @@
 
     import UsuariosService from '../services/usuarioService';
     import Header from "../components/Header";
+    import Footer from "../components/Footer";
 
     export default {
 
         data: () => ({
+
+            mostra: true,
 
             autenticacao: null,
 
@@ -101,6 +107,7 @@
 
         components: {
             Header,
+            Footer,
         },
 
     }
@@ -110,8 +117,9 @@
 <style>
 
     #login-box {
+        min-height: 700px;
         min-width: 300px;
-        display: flex;
+        display: grid;
         align-content: center;
         justify-content: space-around;
     }

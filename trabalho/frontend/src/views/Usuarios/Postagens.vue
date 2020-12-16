@@ -2,7 +2,7 @@
 
     <v-div id="container" >
 
-        <Header :user="post.usuario.nome" :login="post.usuario.login" :pagina="value" show="true" :usuario="post.usuario.id"/>
+        <Header :user="post.usuario.nome" :login="post.usuario.login" :pagina="value" :show="show" :usuario="post.usuario.id"/>
 
         <v-container style="max-width: 600px">
 
@@ -111,7 +111,11 @@
 
                             <v-card id="publicacoes" >
 
-                                <v-row>
+                                <v-row id="superiorCard">
+
+                                    <v-card-title id="usuario-card">
+                                        {{card.usuario.nome}}
+                                    </v-card-title>
 
                                     <v-spacer></v-spacer>
 
@@ -716,13 +720,27 @@
         margin: 0px; 
     }
 
+    #usuario-card{
+        text-transform: capitalize;
+        padding-left: 50px ;
+        font-size: 20px !important;
+    }
+
     .v-card__title{
-        font-size: 30px !important;
+        font-size: 25px !important;
         font-weight: bolder !important;
     }
 
     .v-card__subtitle{
         text-align: center;
+    }
+
+    #superiorCard{
+        display: flex;
+        align-items: center;
+        margin: 0px;
+        max-height: 50px;
+
     }
 
 </style>
