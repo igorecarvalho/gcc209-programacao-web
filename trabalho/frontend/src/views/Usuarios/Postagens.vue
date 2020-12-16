@@ -1,6 +1,6 @@
 <template>
 
-    <v-div id="container" >
+    <div id="container" >
 
         <Header :user="post.usuario.nome" :login="post.usuario.login" :pagina="value" :mostar="mostar" :usuario="post.usuario.id"/>
 
@@ -251,8 +251,12 @@
 
                                 </v-card>
 
+                                <v-card-subtitle id="dataCriacao">
+                                    {{ card.dataCriacao }}
+                                </v-card-subtitle>
+
                                 <v-card-title>
-                                {{ card.titulo }}
+                                    {{ card.titulo }}
                                 </v-card-title>
 
                                 <v-card-subtitle>
@@ -289,8 +293,8 @@
                                             <v-col
                                                 class="col-comentario"
                                                 cols="12"
-                                                sm="3"
-                                                md="3"
+                                                sm="2"
+                                                md="2"
                                                 >
                                                 <v-card-text class="nome-comentario">
                                                     {{ comentario.usuario.nome }}
@@ -301,8 +305,8 @@
                                             <v-col
                                                 class="col-comentario"
                                                 cols="12"
-                                                sm="8"
-                                                md="8">
+                                                sm="7"
+                                                md="7">
 
                                                 <v-card-text class="coment-comentario">
                                                     {{ comentario.mensagem }}
@@ -311,6 +315,16 @@
                                             </v-col>
 
                                              <v-spacer></v-spacer>
+
+                                            <v-col
+                                                class="data-comentario"
+                                                cols="12"
+                                                sm="2"
+                                                md="2">
+
+                                                {{comentario.dataCriacao}}
+
+                                            </v-col>
 
                                             <v-col
                                                 class="col-comentario"
@@ -378,7 +392,7 @@
 
         <Footer />
 
-    </v-div>
+    </div>
 
 </template>
 
@@ -431,7 +445,9 @@
                 id: null,
                 titulo: null,
                 mensagem: null,
-                usuario: null,
+                usuario: {
+                    nome: '',
+                },
             },
 
             posts: [],
@@ -443,7 +459,7 @@
             //console.log((window.location.pathname).split('/')[2])
             UsuarioService.getUsuario((window.location.pathname).split('/')[2])
                 .then(resposta => {
-                        //console.log(resposta.data)
+                        console.log(resposta.data)
                         this.post.usuario = resposta.data
                         this.usuarioID = resposta.data.id
                         this.listar()
@@ -729,6 +745,7 @@
     }
 
     .v-card__title{
+        padding-top: 0px;
         font-size: 25px !important;
         font-weight: bolder !important;
     }
@@ -743,6 +760,19 @@
         margin: 0px;
         max-height: 50px;
 
+    }
+
+    #dataCriacao{
+        font-size: 10px;
+        margin: 0px;
+        padding: 0px;
+        text-align: end;
+        padding-right: 15px;
+    }
+
+    .data-comentario {
+        text-align: end !important;
+        font-size: 8px !important;
     }
 
 </style>

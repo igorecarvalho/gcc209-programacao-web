@@ -1,6 +1,6 @@
 <template>
 
-    <v-div id="container" >
+    <div id="container" >
 
         <Header user="Não logado" login="Favor realizar login" :mostar="mostra"/>
 
@@ -55,7 +55,7 @@
 
         <Footer/>
 
-    </v-div>
+    </div>
 
 </template>
 

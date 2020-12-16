@@ -9,6 +9,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -33,6 +35,10 @@ public class PostService {
     }
 
     public Post cadastrar(Post post){
+
+        LocalDate data = LocalDate.now();
+
+        post.setDataCriacao(data);
 
         return postRepository.save(post);
     }

@@ -1,10 +1,12 @@
 package com.pw.blog.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 
 @Entity
 @Getter
@@ -17,6 +19,12 @@ public class Comentarios implements Serializable {
     private long id;
 
     private String mensagem;
+
+    private LocalDate dataCriacao;
+
+    public void setDataCriacao(LocalDate dataCriacao) {
+        this.dataCriacao = dataCriacao;
+    }
 
     @ManyToOne
     private Usuario usuario;
