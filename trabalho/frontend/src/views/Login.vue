@@ -12,20 +12,21 @@
                     id="login"
                     min-width="300px"
                     style="padding: 10px; margin: 10px"
-                    color="teal"
                     dark
                     >
 
-                    <v-card-title class="headline">
+                    <v-card-title class="headlineLogin">
                         Login de usuário
                     </v-card-title>
 
                     <v-text-field
+                        outlined
                         v-model="usuario.login"
                         label="Login"
                     ></v-text-field>
 
                     <v-text-field
+                        outlined
                         type="password"
                         counter
                         v-model="usuario.senha"
@@ -124,6 +125,15 @@
         display: grid;
         align-content: center;
         justify-content: space-around;
+        
+    }
+
+    #login{
+background-image: radial-gradient(circle, #235511, #39671d, #4f7a29, #668d35, #7ea141, #7fa041, #819f40, #829e40, #6d8933, #587526, #456119, #324e0c);    }
+
+    #headlineLogin{
+        font-size: 50px;
+        font-weight: bolder;
     }
 
     .loader {

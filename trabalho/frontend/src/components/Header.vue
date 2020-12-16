@@ -4,7 +4,7 @@
         
         <v-toolbar
             dark
-            color="primary">
+            id="toolbarHeader">
 
             <v-col
                 cols="12"
@@ -28,19 +28,18 @@
                 v-if="mostar"
                 class="navegacao"
                 :value="pagina"
-                background-color="primary"
-                color="white"
+                color="green darken-4"
                 >
                 <v-btn router :to="todas + usuario">
                     <span>Todas publicações</span>
 
-                    <v-icon>mdi-home</v-icon>
+                    <v-icon size="30px">mdi-home</v-icon>
                 </v-btn>
 
                 <v-btn router :to="minhas + usuario">
                     <span>Minhas Publicações</span>
 
-                    <v-icon>mdi-account</v-icon>
+                    <v-icon  size="30px">mdi-account</v-icon>
                 </v-btn>
 
             </v-bottom-navigation>
@@ -169,8 +168,14 @@
         padding: 0px;
     }
 
+    #toolbarHeader{
+        background-image: linear-gradient(to bottom, #44e17b, #6ae176, #85e173, #9be172, #aee173, #aee27b, #aee383, #afe48a, #a0e699, #94e7a8, #89e7b7, #82e7c4);
+
+    }
+
     .navegacao{
         box-shadow: 0 0 black !important;
+        background-color: transparent !important;
     }
 
 
