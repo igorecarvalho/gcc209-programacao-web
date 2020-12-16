@@ -2,7 +2,7 @@
 
     <v-div id="container" >
 
-        <Header user="Não logado" login="Favor realizar login" :show="mostra"/>
+        <Header user="Não logado" login="Favor realizar login" :mostar="mostra"/>
 
         <v-container id="login-box">
 
@@ -68,7 +68,7 @@
 
         data: () => ({
 
-            mostra: true,
+            mostra: false,
 
             autenticacao: null,
 

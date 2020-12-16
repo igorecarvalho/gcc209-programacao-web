@@ -25,7 +25,7 @@
                 >
             <v-bottom-navigation
                 shift
-                :v-if="mostra"
+                v-if="mostar"
                 class="navegacao"
                 :value="pagina"
                 background-color="primary"
@@ -155,7 +155,7 @@
             user: null,
             login: null,
             pagina: null,
-            mostra: null,
+            mostar: null,
             usuario: null,
         }
 

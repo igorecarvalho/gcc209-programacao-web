@@ -2,7 +2,7 @@
 
     <v-div id="container" >
 
-        <Header :user="post.usuario.nome" :login="post.usuario.login" :pagina="value" :show="show" :usuario="post.usuario.id"/>
+        <Header :user="post.usuario.nome" :login="post.usuario.login" :pagina="value" :mostar="mostar" :usuario="post.usuario.id"/>
 
         <v-container style="max-width: 600px">
 
@@ -394,6 +394,8 @@
 
     export default {
         data: () => ({
+
+            mostar: true,
 
             value: 1,
 
