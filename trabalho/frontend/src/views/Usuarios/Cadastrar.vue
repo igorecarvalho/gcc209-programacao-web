@@ -261,29 +261,19 @@
         methods: {
 
             submit () {
+                
 
-                if(!UsuarioServices.listar()
+                UsuarioServices.cadastrar(this.usuario)
                     .then(resposta => {
-                        //console.log(resposta.data)
-                        resposta.data.some(element => {
-                            console.log(element)
-                            if (this.usuario.login == element.login) {
-                               this.$toast.error("Informe um login de usuario válido!")
-                               return true;
-                            }
-                        });
-                    })){
-                        UsuarioServices.cadastrar(this.usuario)
-                            .then(resposta => {
-                                console.log(resposta.data)
-                                this.$toast.success('Usuario salvo com sucesso!')
-                                window.location.href = this.voltar
-                            })
-                            .catch(error => {
-                                console.log(error)
-                                this.$toast.error("Erro ao cadastrar usuario")
-                            })
-                    }
+                        console.log(resposta.data)
+                        this.$toast.success('Usuario salvo com sucesso!')
+                        window.location.href = this.voltar
+                    })
+                    .catch(error => {
+                        console.log(error)
+                        this.$toast.error("Erro ao cadastrar usuario")
+                    })
+
             },
 
             attEndereco(){
