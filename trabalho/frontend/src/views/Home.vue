@@ -732,6 +732,7 @@
         padding: 5px !important;
     }
     .nome-comentario {
+        color: #f3f3f3;
         padding-right: 10px !important;
         text-align: end !important;
         text-transform: capitalize !important;
