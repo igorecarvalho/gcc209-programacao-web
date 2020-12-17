@@ -51,7 +51,7 @@
 
                     <v-btn router :to="minhas + usuario">
 
-                        <v-icon  size="30px">mdi-account</v-icon>
+                        <v-icon  size="30px">mdi-cat</v-icon>
                     </v-btn>
 
                 </v-bottom-navigation>
@@ -76,12 +76,12 @@
                         v-if="mostar"
                         icon
                         x-large
-                        v-on="on"
-                        >
+                        @click="mudarCor()"
+                        v-on="on">
 
                         <v-avatar >
 
-                            <v-icon color="#ff888a"
+                            <v-icon :color="logoutCor"
                                     size="30px"
                                     dark>
 
@@ -155,6 +155,8 @@
 
             return {
 
+                logoutCor: "#a9a7a7",
+
                 todas: '../home/',
 
                 minhas: '../minhas-postagens/',
@@ -164,13 +166,23 @@
 
         },
 
+        methods: {
+            mudarCor(){
+
+                if(this.logoutCor == "#a9a7a7"){
+                    return this.logoutCor = "#ff888a"
+                }
+                return this.logoutCor = "#a9a7a7"
+            }
+        },
+
         props: {
             user: null,
             login: null,
             pagina: null,
             mostar: null,
             usuario: null,
-        }
+        },
 
     };
 

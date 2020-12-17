@@ -10,11 +10,19 @@
 
                     <v-expansion-panels  focusable>
                         <v-expansion-panel >
-                            <v-expansion-panel-header><h3>Nova publicação</h3></v-expansion-panel-header>
+                            <v-expansion-panel-header disable-icon-rotate>
+                                <h3>Nova publicação</h3>
+                                    <template v-slot:actions>
+                                        <v-icon color="#ff888a">
+                                        mdi-chat-plus
+                                        </v-icon>
+                                    </template>                            
+                            </v-expansion-panel-header>
+
                             <v-expansion-panel-content>
                                 <form>
 
-                                    <v-card id="nova-publicacao" flat>
+                                    <v-card id="publicacoes" flat>
                                         
                                         <v-col cols="12">
 
@@ -158,7 +166,7 @@
 
                                         </template>
 
-                                        <v-card>
+                                        <v-card id="publicacoes">
 
                                             <v-card-title>
 
@@ -798,8 +806,9 @@
     }
 
     #publicacoes{
+        color: #f3f3f3 !important;
         background-color: #7b7979;
-                border: 2px solid #a9a7a7;  
+        border: 2px solid #a9a7a7;  
 
     }
 
@@ -818,5 +827,10 @@
 
     .v-text-field--outlined>.v-input__control>.v-input__slot{
         background-color: #a9a7a7 !important;
+    }
+
+    .v-expansion-panel.v-expansion-panel--active.v-item--active{
+        background-color: #a9a7a7 !important;
+        color: #f3f3f3 !important;
     }
 </style>
