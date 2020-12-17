@@ -8,7 +8,7 @@
 
             <form>
 
-                <v-toolbar flat>
+                <v-toolbar id="publicacoes" flat>
 
                     <v-toolbar-title>
                         <h2>
@@ -20,7 +20,7 @@
                     
                 </v-toolbar>
 
-                <v-card flat>
+                <v-card id="publicacoes" flat>
                     
                     <v-col cols="12" style="padding: 20px">
 
@@ -186,16 +186,19 @@
                             <v-spacer></v-spacer>
 
                             <v-btn
+                                id="botoes"
                                 class="mr-4"
-                                color="red darken-1 white--text"
+                                color="white--text"
                                 router :to="voltar"
+                                text
                                 >
                                 Cancelar
                             </v-btn>
 
                             <v-btn
+                                id="botaoGeral"
                                 class="mr-4"
-                                color="green white--text"
+                                color="white--text"
                                 @click="submit"
                                 >
                                 Salvar

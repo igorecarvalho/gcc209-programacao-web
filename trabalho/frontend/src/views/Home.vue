@@ -8,92 +8,104 @@
 
                 <v-container fluid>
 
-                    <form>
+                    <v-expansion-panels  focusable>
+                        <v-expansion-panel >
+                            <v-expansion-panel-header disable-icon-rotate>
+                                <h3>Nova publicação</h3>
+                                    <template v-slot:actions>
+                                        <v-icon color="#ff888a">
+                                        mdi-chat-plus
+                                        </v-icon>
+                                    </template>                            
+                            </v-expansion-panel-header>
 
-                        <v-card id="nova-publicacao" flat>
+                            <v-expansion-panel-content>
+                                <form>
 
-                            <v-card-title class="headline">
-                                Nova publicação
-                            </v-card-title>
-                            
-                            <v-col cols="12">
+                                    <v-card id="publicacoes" flat>
+                                        
+                                        <v-col cols="12">
 
-                                <v-row>
+                                            <v-row>
 
-                                    <v-col
-                                        cols="12"
-                                        sm="12"
-                                        md="12"
-                                        >
+                                                <v-col
+                                                    cols="12"
+                                                    sm="12"
+                                                    md="12"
+                                                    >
 
-                                        <v-text-field
-                                            hide-details="auto"
-                                            outlined
-                                            v-model="post.titulo"
-                                            label="Titulo"
-                                        ></v-text-field>
+                                                    <v-text-field
+                                                        hide-details="auto"
+                                                        outlined
+                                                        v-model="post.titulo"
+                                                        label="Titulo"
+                                                    ></v-text-field>
 
-                                    </v-col>
+                                                </v-col>
 
-                                </v-row>
+                                            </v-row>
 
-                                <v-row>
+                                            <v-row>
 
-                                    <v-col
-                                        cols="12"
-                                        >
+                                                <v-col
+                                                    cols="12"
+                                                    >
 
-                                        <v-textarea
-                                            hide-details="auto"
-                                            outlined
-                                            rows="3"
-                                            row-height="15"
-                                            v-model="post.mensagem"
-                                            label="Digite aqui a sua publicacao"
-                                        ></v-textarea>
+                                                    <v-textarea
+                                                        hide-details="auto"
+                                                        outlined
+                                                        rows="3"
+                                                        row-height="15"
+                                                        v-model="post.mensagem"
+                                                        label="Digite aqui a sua publicacao"
+                                                    ></v-textarea>
 
-                                    </v-col>
+                                                </v-col>
 
-                                </v-row>
+                                            </v-row>
 
-                                <v-col cols="12">
+                                            <v-col cols="12">
 
-                                    <v-file-input
-                                        outlined
-                                        show-size
-                                        accept="image/png, image/jpeg, image/bmp"
-                                        prepend-icon="mdi-camera"
-                                        label="Selecione a imagem"
-                                        @change="selectFile">
-                                    </v-file-input>
-                                    
-                                </v-col>
+                                                <v-file-input
+                                                    outlined
+                                                    show-size
+                                                    accept="image/png, image/jpeg, image/bmp"
+                                                    prepend-icon="mdi-camera"
+                                                    label="Selecione a imagem"
+                                                    @change="selectFile">
+                                                </v-file-input>
+                                                
+                                            </v-col>
 
-                                <v-row>
+                                            <v-row>
 
-                                    <v-spacer></v-spacer>
+                                                <v-spacer></v-spacer>
 
-                                    <v-btn
-                                        class="mr-4"
-                                        color="green white--text"
-                                        @click="submit"
-                                        >
-                                        Publicar
-                                    </v-btn>
-                                
-                                </v-row>
-                                
-                            </v-col>
+                                                <v-btn
+                                                    id="botaoGeral"
+                                                    class="mr-4"
+                                                    color="white--text"
+                                                    @click="submit"
+                                                    >
+                                                    Publicar
+                                                </v-btn>
+                                            
+                                            </v-row>
+                                            
+                                        </v-col>
 
-                        </v-card>
+                                    </v-card>
 
-                    </form>
+                                </form>
+                            </v-expansion-panel-content>
+                        </v-expansion-panel>
+                    </v-expansion-panels>
 
                 </v-container>
 
                 <v-container fluid>
 
-                        <v-toolbar>
+                        <v-toolbar color="white--text" id="publicacoes">
 
                             <v-toolbar-title>
 
@@ -109,7 +121,7 @@
                             v-for="card in posts"
                             :key="card.id">
 
-                            <v-card id="publicacoes" >
+                            <v-card color="white--text" id="publicacoes" >
 
                                 <v-row id="superiorCard">
 
@@ -122,7 +134,7 @@
                                     <!-- <v-btn
                                         class="mr-4"
                                         icon
-                                        color="red white--text"
+                                        color="#ff888a"
                                         @click="deletar(card.id)"
                                         >
                                         <v-icon size="20px">
@@ -141,7 +153,7 @@
                                             <v-btn
                                                 class="mr-4"
                                                 icon
-                                                color="green white--text"
+                                                color="#ff888a"
                                                 v-bind="attrs"
                                                 v-on="on"
                                                 @click="carregarEdicao(card)">
@@ -154,7 +166,7 @@
 
                                         </template>
 
-                                        <v-card>
+                                        <v-card id="publicacoes">
 
                                             <v-card-title>
 
@@ -225,7 +237,8 @@
 
                                                 <v-btn
                                                     class="mr-4"
-                                                    color="green white--text"
+                                                    id="botaoGeral"
+                                                    color="white--text"
                                                     @click="editar(card)">
                                                     Salvar
                                                 </v-btn>
@@ -256,7 +269,7 @@
                                 </v-card-subtitle>
 
                                 <v-card-title>
-                                {{ card.titulo }}
+                                    {{ card.titulo }}
                                 </v-card-title>
 
                                 <v-card-subtitle>
@@ -266,7 +279,7 @@
                                 <v-card-actions>
 
                                     <v-btn
-                                        color="orange lighten-2"
+                                        id="botoes"
                                         text>
                                         Comentários ({{card.comentarios == undefined ? 0 : card.comentarios.length }})
                                     </v-btn>
@@ -326,25 +339,25 @@
 
                                             </v-col>
 
-                                            <v-col
+                                            <!-- <v-col
                                                 class="col-comentario"
                                                 cols="12"
                                                 sm="1"
                                                 md="1">
 
-                                                <!-- <v-btn
+                                                <v-btn
                                                     class="mr-4"
                                                     icon
-                                                    color="red white--text"
+                                                    color="#ff888a"
                                                     @click="deletarComentario(comentario.id)"
                                                     >
                                                     <v-icon size="15px">
                                                         mdi-delete
                                                     </v-icon>
 
-                                                </v-btn> -->
+                                                </v-btn>
 
-                                            </v-col>
+                                            </v-col> -->
 
                                         </v-row>
 
@@ -354,7 +367,6 @@
                                                 hide-details="auto"
                                                 outlined
                                                 v-model="comentario"
-                                                label="digite o comentario..."
                                             ></v-text-field>
 
                                         </v-col>
@@ -366,7 +378,6 @@
                                             <v-btn
                                                 text
                                                 id="botao-comentar"
-                                                color="green"
                                                 size="10px"
                                                 @click="comentar(card.id)"
                                                 >
@@ -456,6 +467,7 @@
         }),
 
         mounted(){
+            this.show = true
             //console.log((window.location.pathname).split('/')[2])
             UsuarioService.getUsuario((window.location.pathname).split('/')[2])
                 .then(resposta => {
@@ -528,14 +540,14 @@
                         .catch(() => {
                             this.progress = 0;
                             this.message = "Could not upload the file!";
-                            this.currentFile = undefined;
+                            this.currentFile = '';
                         });
 
                         this.$toast.success("Postagem realizado com sucesso")
                         this.listar()
                         this.post.titulo = ''
                         this.post.mensagem = ''
-                        this.currentFile = undefined
+                        this.currentFile = ''
                     })
                     .catch(() => {
                         //console.log(error)
@@ -557,6 +569,7 @@
                                 //console.log(resposta.data)
                                 //console.log("comentou")
                                 this.$toast.success("Comentario realizado com sucesso")
+                                this.comentario = ''
                                 this.novoComentario.mensagem = ''
                                 this.listar()
                             })
@@ -572,7 +585,6 @@
             },
             
             listar(){
-                
                 PostServices.listar()
                     .then( resposta => {
                         this.posts = resposta.data
@@ -593,8 +605,8 @@
 
                             }
                         }
-                        //console.log(this.posts)
                         this.show = false
+                        //console.log(this.posts)
                         this.novoComentario.mensagem = ''
                         this.$toast.success("Sucesso ao carregar postagens")
                     })
@@ -686,11 +698,14 @@
     #botao-comentar {
         margin: 10px;
         padding: 5px;
+        background-color: #ff888a !important;
+        color: #f3f3f3;
     }
 
     .img-card {
         min-height: 100px;
         padding: 10px;
+        margin: 10px
     }
 
     .v-image__image.v-image__image--cover{
@@ -738,6 +753,12 @@
         margin: 0px; 
     }
 
+    #usuario-card{
+        text-transform: capitalize;
+        padding-left: 50px ;
+        font-size: 20px !important;
+    }
+
     .v-card__title{
         padding-top: 0px;
         font-size: 25px !important;
@@ -746,6 +767,8 @@
 
     .v-card__subtitle{
         text-align: center;
+        color: white !important;
+
     }
 
     #superiorCard{
@@ -764,22 +787,58 @@
         padding-right: 15px;
     }
 
-    #superiorCard{
-        display: flex;
-        align-items: center;
-        margin: 0px;
-        max-height: 50px;
-
-    }
-
-    #usuario-card{
-        text-transform: capitalize;
-        padding-left: 50px ;
-        font-size: 20px !important;
-    }
-
     .data-comentario {
         text-align: end !important;
         font-size: 8px !important;
+    }
+
+    .botoes{
+        color: #ff888a;
+    }
+
+    #botoes{
+        color: #ff888a;
+
+    }
+
+    #botaoGeral{
+        background-color: #ff888a !important;
+    }
+
+    #publicacoes{
+        color: #f3f3f3 !important;
+        background-color: #7b7979;
+        border: 2px solid #a9a7a7;  
+
+    }
+
+    .v-application.primary--text{
+        caret-color: #ff888a !important;
+    }
+
+    .v-input.v-input--hide-details.v-input--is-focused{
+        color: #ff888a !important;
+        caret-color: #ff888a !important;
+    }
+
+    .theme--light.v-input, .theme--light.v-input input, .theme--light.v-input textarea{
+        color: #f3f3f3 !important;
+    }
+
+    .v-text-field--outlined>.v-input__control>.v-input__slot{
+        background-color: #a9a7a7 !important;
+    }
+
+    .v-expansion-panel.v-expansion-panel--active.v-item--active{
+        background-color: #a9a7a7 !important;
+        color: #f3f3f3 !important;
+    }
+    .v-expansion-panel-header{
+        background-color: #a9a7a7 !important;
+        color: #f3f3f3 !important;
+    }
+    .v-expansion-panel-header.v-expansion-panel-header--active{
+                background-color: #7b7979 !important;
+
     }
 </style>

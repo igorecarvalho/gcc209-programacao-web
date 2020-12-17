@@ -833,4 +833,9 @@
         background-color: #a9a7a7 !important;
         color: #f3f3f3 !important;
     }
+    .v-expansion-panel-header.v-expansion-panel-header--active{
+                background-color: #7b7979 !important;
+
+    }
+
 </style>

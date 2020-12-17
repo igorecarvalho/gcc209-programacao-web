@@ -82,10 +82,10 @@
                         <v-avatar >
 
                             <v-icon :color="logoutCor"
-                                    size="30px"
+                                    size="25px"
                                     dark>
 
-                                mdi-logout
+                                mdi-location-exit
                             </v-icon>
                             
                         </v-avatar>
