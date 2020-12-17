@@ -8,92 +8,96 @@
 
                 <v-container fluid>
 
-                    <form>
+                    <v-expansion-panels  focusable>
+                        <v-expansion-panel >
+                            <v-expansion-panel-header><h3>Nova publicação</h3></v-expansion-panel-header>
+                            <v-expansion-panel-content>
+                                <form>
 
-                        <v-card id="nova-publicacao" flat>
+                                    <v-card id="nova-publicacao" flat>
+                                        
+                                        <v-col cols="12">
 
-                            <v-card-title class="headline">
-                                Nova publicação
-                            </v-card-title>
-                            
-                            <v-col cols="12">
+                                            <v-row>
 
-                                <v-row>
+                                                <v-col
+                                                    cols="12"
+                                                    sm="12"
+                                                    md="12"
+                                                    >
 
-                                    <v-col
-                                        cols="12"
-                                        sm="12"
-                                        md="12"
-                                        >
+                                                    <v-text-field
+                                                        hide-details="auto"
+                                                        outlined
+                                                        v-model="post.titulo"
+                                                        label="Titulo"
+                                                    ></v-text-field>
 
-                                        <v-text-field
-                                            hide-details="auto"
-                                            outlined
-                                            v-model="post.titulo"
-                                            label="Titulo"
-                                        ></v-text-field>
+                                                </v-col>
 
-                                    </v-col>
+                                            </v-row>
 
-                                </v-row>
+                                            <v-row>
 
-                                <v-row>
+                                                <v-col
+                                                    cols="12"
+                                                    >
 
-                                    <v-col
-                                        cols="12"
-                                        >
+                                                    <v-textarea
+                                                        hide-details="auto"
+                                                        outlined
+                                                        rows="3"
+                                                        row-height="15"
+                                                        v-model="post.mensagem"
+                                                        label="Digite aqui a sua publicacao"
+                                                    ></v-textarea>
 
-                                        <v-textarea
-                                            hide-details="auto"
-                                            outlined
-                                            rows="3"
-                                            row-height="15"
-                                            v-model="post.mensagem"
-                                            label="Digite aqui a sua publicacao"
-                                        ></v-textarea>
+                                                </v-col>
 
-                                    </v-col>
+                                            </v-row>
 
-                                </v-row>
+                                            <v-col cols="12">
 
-                                <v-col cols="12">
+                                                <v-file-input
+                                                    outlined
+                                                    show-size
+                                                    accept="image/png, image/jpeg, image/bmp"
+                                                    prepend-icon="mdi-camera"
+                                                    label="Selecione a imagem"
+                                                    @change="selectFile">
+                                                </v-file-input>
+                                                
+                                            </v-col>
 
-                                    <v-file-input
-                                        outlined
-                                        show-size
-                                        accept="image/png, image/jpeg, image/bmp"
-                                        prepend-icon="mdi-camera"
-                                        label="Selecione a imagem"
-                                        @change="selectFile">
-                                    </v-file-input>
-                                    
-                                </v-col>
+                                            <v-row>
 
-                                <v-row>
+                                                <v-spacer></v-spacer>
 
-                                    <v-spacer></v-spacer>
+                                                <v-btn
+                                                    id="botaoGeral"
+                                                    class="mr-4"
+                                                    color="white--text"
+                                                    @click="submit"
+                                                    >
+                                                    Publicar
+                                                </v-btn>
+                                            
+                                            </v-row>
+                                            
+                                        </v-col>
 
-                                    <v-btn
-                                        class="mr-4"
-                                        color="green white--text"
-                                        @click="submit"
-                                        >
-                                        Publicar
-                                    </v-btn>
-                                
-                                </v-row>
-                                
-                            </v-col>
+                                    </v-card>
 
-                        </v-card>
-
-                    </form>
+                                </form>
+                            </v-expansion-panel-content>
+                        </v-expansion-panel>
+                    </v-expansion-panels>
 
                 </v-container>
 
                 <v-container fluid>
 
-                        <v-toolbar>
+                        <v-toolbar color="white--text" id="publicacoes">
 
                             <v-toolbar-title>
 
@@ -109,7 +113,7 @@
                             v-for="card in posts"
                             :key="card.id">
 
-                            <v-card id="publicacoes" >
+                            <v-card color="white--text" id="publicacoes" >
 
                                 <v-row id="superiorCard">
 
@@ -122,7 +126,7 @@
                                     <v-btn
                                         class="mr-4"
                                         icon
-                                        color="red white--text"
+                                        color="#ff888a"
                                         @click="deletar(card.id)"
                                         >
                                         <v-icon size="20px">
@@ -141,7 +145,7 @@
                                             <v-btn
                                                 class="mr-4"
                                                 icon
-                                                color="green white--text"
+                                                color="#ff888a"
                                                 v-bind="attrs"
                                                 v-on="on"
                                                 @click="carregarEdicao(card)">
@@ -225,7 +229,8 @@
 
                                                 <v-btn
                                                     class="mr-4"
-                                                    color="green white--text"
+                                                    id="botaoGeral"
+                                                    color="white--text"
                                                     @click="editar(card)">
                                                     Salvar
                                                 </v-btn>
@@ -266,7 +271,7 @@
                                 <v-card-actions>
 
                                     <v-btn
-                                        color="orange lighten-2"
+                                        id="botoes"
                                         text>
                                         Comentários ({{card.comentarios == undefined ? 0 : card.comentarios.length }})
                                     </v-btn>
@@ -335,7 +340,7 @@
                                                 <v-btn
                                                     class="mr-4"
                                                     icon
-                                                    color="red white--text"
+                                                    color="#ff888a"
                                                     @click="deletarComentario(comentario.id)"
                                                     >
                                                     <v-icon size="15px">
@@ -354,7 +359,6 @@
                                                 hide-details="auto"
                                                 outlined
                                                 v-model="comentario"
-                                                label="digite o comentario..."
                                             ></v-text-field>
 
                                         </v-col>
@@ -366,7 +370,6 @@
                                             <v-btn
                                                 text
                                                 id="botao-comentar"
-                                                color="green"
                                                 size="10px"
                                                 @click="comentar(card.id)"
                                                 >
@@ -687,11 +690,14 @@
     #botao-comentar {
         margin: 10px;
         padding: 5px;
+        background-color: #ff888a !important;
+        color: #f3f3f3;
     }
 
     .img-card {
         min-height: 100px;
         padding: 10px;
+        margin: 10px
     }
 
     .v-image__image.v-image__image--cover{
@@ -753,6 +759,8 @@
 
     .v-card__subtitle{
         text-align: center;
+        color: white !important;
+
     }
 
     #superiorCard{
@@ -776,4 +784,39 @@
         font-size: 8px !important;
     }
 
+    .botoes{
+        color: #ff888a;
+    }
+
+    #botoes{
+        color: #ff888a;
+
+    }
+
+    #botaoGeral{
+        background-color: #ff888a !important;
+    }
+
+    #publicacoes{
+        background-color: #7b7979;
+                border: 2px solid #a9a7a7;  
+
+    }
+
+    .v-application.primary--text{
+        caret-color: #ff888a !important;
+    }
+
+    .v-input.v-input--hide-details.v-input--is-focused{
+        color: #ff888a !important;
+        caret-color: #ff888a !important;
+    }
+
+    .theme--light.v-input, .theme--light.v-input input, .theme--light.v-input textarea{
+        color: #f3f3f3 !important;
+    }
+
+    .v-text-field--outlined>.v-input__control>.v-input__slot{
+        background-color: #a9a7a7 !important;
+    }
 </style>

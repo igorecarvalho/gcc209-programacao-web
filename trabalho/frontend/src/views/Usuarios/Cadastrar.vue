@@ -1,213 +1,221 @@
 <template>
 
-    <v-container>
+    <div id="container" >
 
-        <form>
+        <Header user="Não logado" login="Favor realizar login" :mostar="mostra"/>
 
-            <v-toolbar flat>
+        <v-container>
 
-                <v-toolbar-title>
-                    <h2>
-                        <strong>
-                            Cadastro de Usuario
-                        </strong>
-                    </h2>
-                </v-toolbar-title>
-                
-            </v-toolbar>
+            <form>
 
-            <v-card flat>
-                
-                <v-col cols="12" style="padding: 20px">
+                <v-toolbar flat>
 
-                    <v-row style="margin: 10px">
-                        <v-toolbar-title>
-
-                                <strong>
-                                    Informações pessoais
-                                </strong>
-
-                        </v-toolbar-title>
-                    </v-row>
-
-                    <v-row>
-
-                        <v-col
-                            cols="12"
-                            sm="6"
-                            md="6"
-                            >
-
-                            <v-text-field
-                                v-model="usuario.nome"
-                                label="Nome"
-                            ></v-text-field>
-
-                        </v-col>
-
-                    </v-row>
-
-                    <v-row>
-
-                        <v-col
-                            cols="12"
-                            sm="6"
-                            md="6"
-                            >
-
-                            <v-text-field
-                                v-model="usuario.login"
-                                label="Login"
-                            ></v-text-field>
-
-                        </v-col>
-
-                    </v-row>
-
-                    <v-row>
-
-                        <v-col
-                            cols="12"
-                            sm="6"
-                            md="6"
-                            >
-
-                            <v-text-field
-                                type="password"
-                                v-model="usuario.senha"
-                                label="Senha"
-                            ></v-text-field>
-
-                        </v-col>
-
-                    </v-row>
-
-                    <v-row style="margin: 10px">
-                        <v-toolbar-title>
-
-                                <strong>
-                                    Endereço
-                                </strong>
-
-                        </v-toolbar-title>
-                    </v-row>
-
-                    <v-row>
-
-                        <v-col
-                            cols="12"
-                            sm="6"
-                            md="6"
-                            >
-
-                            <v-text-field
-                                v-model="usuario.cep"
-                                v-on:keyup="attEndereco"
-                                mask='"#####-###"'
-                                label="CEP"
-                            ></v-text-field>
-
-                        </v-col>
-
-                    </v-row>
-
-                    <v-row>
-
-                        <v-col
-                            cols="12"
-                            sm="6"
-                            md="6"
-                            >
-
-                            <v-text-field
-                                v-model="usuario.logradouro"
-                                :value="usuario.logradouro"
-                                label="Logradouro"
-                            ></v-text-field>
-
-                        </v-col>
-
-                        <v-col
-                            cols="12"
-                            sm="6"
-                            md="6"
-                            >
-
-                            <v-text-field
-                                v-model="usuario.bairro"
-                                :value="usuario.bairro"
-                                label="Bairro"
-                            ></v-text-field>
-
-                        </v-col>
-
-                    </v-row>
-
-                    <v-row>
-
-                        <v-col
-                            cols="12"
-                            sm="6"
-                            md="6"
-                            >
-
-                            <v-text-field
-                                v-model="usuario.localidade"
-                                :value="usuario.localidade"
-                                label="Cidade"
-                            ></v-text-field>
-
-                        </v-col>
-
-                        <v-col
-                            cols="12"
-                            sm="6"
-                            md="6"
-                            >
-
-                            <v-text-field
-                                v-model="usuario.uf"
-                                :value="usuario.uf"
-                                label="UF"
-                            ></v-text-field>
-
-                        </v-col>
-
-                    </v-row>
-
-                <v-col cols="12">
-
-                    <v-row>
-
-                        <v-spacer></v-spacer>
-
-                        <v-btn
-                            class="mr-4"
-                            color="red darken-1 white--text"
-                            router :to="voltar"
-                            >
-                            Cancelar
-                        </v-btn>
-
-                        <v-btn
-                            class="mr-4"
-                            color="green white--text"
-                            @click="submit"
-                            >
-                            Salvar
-                        </v-btn>
+                    <v-toolbar-title>
+                        <h2>
+                            <strong>
+                                Cadastro de Usuario
+                            </strong>
+                        </h2>
+                    </v-toolbar-title>
                     
-                    </v-row>
+                </v-toolbar>
+
+                <v-card flat>
                     
-                </v-col>
+                    <v-col cols="12" style="padding: 20px">
 
-                </v-col>
+                        <v-row style="margin: 10px">
+                            <v-toolbar-title>
 
-            </v-card>
+                                    <strong>
+                                        Informações pessoais
+                                    </strong>
 
-        </form>
+                            </v-toolbar-title>
+                        </v-row>
 
-    </v-container>
+                        <v-row>
+
+                            <v-col
+                                cols="12"
+                                sm="6"
+                                md="6"
+                                >
+
+                                <v-text-field
+                                    v-model="usuario.nome"
+                                    label="Nome"
+                                ></v-text-field>
+
+                            </v-col>
+
+                        </v-row>
+
+                        <v-row>
+
+                            <v-col
+                                cols="12"
+                                sm="6"
+                                md="6"
+                                >
+
+                                <v-text-field
+                                    v-model="usuario.login"
+                                    label="Login"
+                                ></v-text-field>
+
+                            </v-col>
+
+                        </v-row>
+
+                        <v-row>
+
+                            <v-col
+                                cols="12"
+                                sm="6"
+                                md="6"
+                                >
+
+                                <v-text-field
+                                    type="password"
+                                    v-model="usuario.senha"
+                                    label="Senha"
+                                ></v-text-field>
+
+                            </v-col>
+
+                        </v-row>
+
+                        <v-row style="margin: 10px">
+                            <v-toolbar-title>
+
+                                    <strong>
+                                        Endereço
+                                    </strong>
+
+                            </v-toolbar-title>
+                        </v-row>
+
+                        <v-row>
+
+                            <v-col
+                                cols="12"
+                                sm="6"
+                                md="6"
+                                >
+
+                                <v-text-field
+                                    v-model="usuario.cep"
+                                    v-on:keyup="attEndereco"
+                                    mask='"#####-###"'
+                                    label="CEP"
+                                ></v-text-field>
+
+                            </v-col>
+
+                        </v-row>
+
+                        <v-row>
+
+                            <v-col
+                                cols="12"
+                                sm="6"
+                                md="6"
+                                >
+
+                                <v-text-field
+                                    v-model="usuario.logradouro"
+                                    :value="usuario.logradouro"
+                                    label="Logradouro"
+                                ></v-text-field>
+
+                            </v-col>
+
+                            <v-col
+                                cols="12"
+                                sm="6"
+                                md="6"
+                                >
+
+                                <v-text-field
+                                    v-model="usuario.bairro"
+                                    :value="usuario.bairro"
+                                    label="Bairro"
+                                ></v-text-field>
+
+                            </v-col>
+
+                        </v-row>
+
+                        <v-row>
+
+                            <v-col
+                                cols="12"
+                                sm="6"
+                                md="6"
+                                >
+
+                                <v-text-field
+                                    v-model="usuario.localidade"
+                                    :value="usuario.localidade"
+                                    label="Cidade"
+                                ></v-text-field>
+
+                            </v-col>
+
+                            <v-col
+                                cols="12"
+                                sm="6"
+                                md="6"
+                                >
+
+                                <v-text-field
+                                    v-model="usuario.uf"
+                                    :value="usuario.uf"
+                                    label="UF"
+                                ></v-text-field>
+
+                            </v-col>
+
+                        </v-row>
+
+                    <v-col cols="12">
+
+                        <v-row>
+
+                            <v-spacer></v-spacer>
+
+                            <v-btn
+                                class="mr-4"
+                                color="red darken-1 white--text"
+                                router :to="voltar"
+                                >
+                                Cancelar
+                            </v-btn>
+
+                            <v-btn
+                                class="mr-4"
+                                color="green white--text"
+                                @click="submit"
+                                >
+                                Salvar
+                            </v-btn>
+                        
+                        </v-row>
+                        
+                    </v-col>
+
+                    </v-col>
+
+                </v-card>
+
+            </form>
+
+        </v-container>
+
+        <Footer/>
+
+    </div>
         
 </template>
 
@@ -215,10 +223,14 @@
 
     import UsuarioServices from "../../services/usuarioService";
     import CepServices from "../../services/cepService";
+    import Header from "../../components/Header";
+    import Footer from "../../components/Footer";
 
     export default {
 
         data: () => ({
+            
+            mostra: false,
 
             voltar: '/',
 
@@ -274,6 +286,12 @@
             }
 
         },
+
+        components: {
+            Header,
+            Footer,
+        },
+
     }
 
 </script>

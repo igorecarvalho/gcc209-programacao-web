@@ -43,5 +43,7 @@
 
 <style>
     #cardFooter{
-background-image: linear-gradient(to top, #151614, #1c211a, #212d20, #253a28, #274731, #2b5539, #306340, #347248, #45854c, #5a974e, #71aa4e, #8cbc4d);    }
+        background-color: #7b7979;
+        border-top: 2px solid #a9a7a7;
+    }
 </style>

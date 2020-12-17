@@ -8,41 +8,53 @@
 
             <v-col
                 cols="12"
-                sm="3"
-                md="3"
+                sm="1"
+                md="1"
+                id="logo"
                 >
-                <v-toolbar-title>
+                <div class="d-flex flex-column justify-space-between align-center">
+                    <v-img
+                        width="50px"
+                        id="img"
+                        src="../assets/logo.png">
+                    </v-img>
+                </div>
+            </v-col>
 
-                    <strong> <h1>Rede de gato</h1> </strong>
+            <v-col
+                cols="12"
+                sm="4"
+                md="4"
+                >
+                <v-toolbar-title >
+
+                    <strong> <h1>REDE DE GATO</h1> </strong>
                 
                 </v-toolbar-title>
             </v-col>
 
             <v-col
                 cols="12"
-                sm="3"
-                md="8"
+                sm="6"
+                md="6"
                 >
-            <v-bottom-navigation
-                shift
-                v-if="mostar"
-                class="navegacao"
-                :value="pagina"
-                color="green darken-4"
-                >
-                <v-btn router :to="todas + usuario">
-                    <span>Todas publicações</span>
+                <v-bottom-navigation
+                    v-if="mostar"
+                    class="navegacao"
+                    :value="pagina"
+                    color="#ff888a"
+                    >
+                    <v-btn router :to="todas + usuario">
 
-                    <v-icon size="30px">mdi-home</v-icon>
-                </v-btn>
+                        <v-icon size="30px">mdi-home</v-icon>
+                    </v-btn>
 
-                <v-btn router :to="minhas + usuario">
-                    <span>Minhas Publicações</span>
+                    <v-btn router :to="minhas + usuario">
 
-                    <v-icon  size="30px">mdi-account</v-icon>
-                </v-btn>
+                        <v-icon  size="30px">mdi-account</v-icon>
+                    </v-btn>
 
-            </v-bottom-navigation>
+                </v-bottom-navigation>
 
             </v-col>
 
@@ -67,13 +79,13 @@
                         v-on="on"
                         >
 
-                        <v-avatar color="white">
+                        <v-avatar >
 
-                            <v-icon color="teal"
-                                    large
+                            <v-icon color="#ff888a"
+                                    size="30px"
                                     dark>
 
-                                mdi-account
+                                mdi-logout
                             </v-icon>
                             
                         </v-avatar>
@@ -90,7 +102,7 @@
 
                             <v-avatar color="white">
 
-                                <v-icon color="teal"
+                                <v-icon color="#ff888a"
                                         large
                                         dark>
 
@@ -99,7 +111,9 @@
                                 
                             </v-avatar>
 
-                            <h3>{{ user }}</h3>
+                            <p class="logoutNome">
+                                {{ user }}
+                            </p>
 
                             <p class="caption mt-1">
                                 {{ login }}
@@ -169,13 +183,33 @@
     }
 
     #toolbarHeader{
-        background-image: linear-gradient(to bottom, #44e17b, #6ae176, #85e173, #9be172, #aee173, #aee27b, #aee383, #afe48a, #a0e699, #94e7a8, #89e7b7, #82e7c4);
+        background-color: #7b7979;
+        box-shadow: 0 0 black;
+        border-bottom: 2px solid #a9a7a7;
+
 
     }
 
     .navegacao{
         box-shadow: 0 0 black !important;
         background-color: transparent !important;
+        justify-content: flex-end !important;
+
+        
+    }
+
+    .v-btn__content{
+        font-weight: bolder;
+    }
+
+    #corFont{
+        color: #ff888a;
+    }
+
+    .logoutNome{
+        font-size: 20px;
+        text-transform: capitalize;
+        font-weight: bolder;
     }
 
 

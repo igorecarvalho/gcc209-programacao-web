@@ -34,7 +34,7 @@
 <style>
 
 #app{
-    background-color: grey;
+    background-color: #676565;
 }
 
 </style>

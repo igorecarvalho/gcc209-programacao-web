@@ -42,7 +42,7 @@
 
                         <v-spacer></v-spacer>
 
-                        <v-btn @click="login()">
+                        <v-btn color="#ff888a" @click="login()">
                                 Entrar
                         </v-btn>
 
@@ -125,11 +125,13 @@
         display: grid;
         align-content: center;
         justify-content: space-around;
-        
+             
     }
 
     #login{
-background-image: radial-gradient(circle, #235511, #39671d, #4f7a29, #668d35, #7ea141, #7fa041, #819f40, #829e40, #6d8933, #587526, #456119, #324e0c);    }
+        background-color: #7b7979;
+        border: 2px solid #a9a7a7;  
+    }
 
     #headlineLogin{
         font-size: 50px;
